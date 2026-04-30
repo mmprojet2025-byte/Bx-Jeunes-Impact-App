@@ -36,8 +36,17 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(com.bxjeunesimpact.api.entity.User user) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("userId", user.getId());
+        
+        // On convertit le Set<Role> en une liste de chaînes de caractères
+        java.util.List<String> roles = user.getRoles().stream()
+                .map(Enum::name)
+                .toList();
+        extraClaims.put("roles", roles);
+
+        return buildToken(extraClaims, user, jwtExpiration);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
