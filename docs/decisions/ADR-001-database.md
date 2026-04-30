@@ -19,3 +19,27 @@ Nous avons décidé d'utiliser **PostgreSQL 16**.
 
 ## Conséquences
 * Tous les développeurs de l'équipe devront installer PostgreSQL localement ou utiliser le `docker-compose.yml` fourni pour harmoniser les environnements de développement.
+
+
+
+
+# Gestion de la Base de Données (Flyway)
+
+Ce projet utilise **Flyway** pour le versioning et la migration du schéma de base de données. 
+**Aucune modification de la base de données ne doit être faite manuellement ou via Hibernate (`ddl-auto=update`).**
+
+## Convention de nommage
+
+Tous les scripts de migration doivent être placés dans le dossier :
+`backend-spring/src/main/resources/db/migration`
+
+Le nommage des fichiers est strict et doit respecter la syntaxe suivante :
+`V<Numéro_de_version>__<Description_en_snake_case>.sql`
+*(Attention : il y a deux underscores `__` entre la version et la description).*
+
+### Exemples valides :
+* `V1__init_schema.sql`
+* `V2__create_users_table.sql`
+* `V3__add_status_to_projects.sql`
+
+Au démarrage de l'application, Flyway lira ces fichiers dans l'ordre numérique et appliquera les changements manquants dans la base de données. L'historique des migrations exécutées est stocké dans la table `flyway_schema_history`.
