@@ -1,0 +1,1 @@
+Ce dossier contient les Scripts SQL (Initialisation MySQL/PostgreSQL)
