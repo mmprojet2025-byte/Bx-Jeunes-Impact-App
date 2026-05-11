@@ -9,13 +9,14 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    // On ignore le mot de passe ici car il doit être haché par le Service avant la sauvegarde
+    // On ignore le mot de passe et les champs techniques
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "roles", ignore = true)
     @Mapping(target = "active", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "group", ignore = true) // Géré par le service
+    @Mapping(target = "group", ignore = true) 
+    @Mapping(target = "authorities", ignore = true) // <-- LA LIGNE MAGIQUE ICI
     User toEntity(UserCreateRequest request);
 
     // Extraction des champs de l'entité liée (Group)
