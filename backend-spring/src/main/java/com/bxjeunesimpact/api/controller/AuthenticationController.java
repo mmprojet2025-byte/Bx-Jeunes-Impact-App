@@ -21,7 +21,8 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody UserCreateRequest request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+        return ResponseEntity.status(org.springframework.http.HttpStatus.CREATED)
+                .body(authenticationService.register(request));
     }
 
     @PostMapping("/login")
