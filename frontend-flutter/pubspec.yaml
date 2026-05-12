@@ -1,0 +1,86 @@
+name: bx_jeunes_impact
+description: Application mobile & web pour les jeunes de Bruxelles — Connecter, Inspirer, Impacter.
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+# ─────────────────────────────────────────────────────────────
+#  DEPENDENCIES
+# ─────────────────────────────────────────────────────────────
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # ── State management ──────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Navigation ────────────────────────────────────────────
+  go_router: ^13.2.0
+
+  # ── HTTP & Networking ─────────────────────────────────────
+  dio: ^5.4.3+1
+  connectivity_plus: ^6.0.3
+
+  # ── Secure Storage (JWT tokens) ───────────────────────────
+  flutter_secure_storage: ^9.2.2
+
+  # ── Images ────────────────────────────────────────────────
+  cached_network_image: ^3.3.1
+  image_picker: ^1.1.2
+
+  # ── Internationalisation ──────────────────────────────────
+  intl: ^0.19.0
+
+  # ── UI Utilities ──────────────────────────────────────────
+  gap: ^3.0.1
+  url_launcher: ^6.3.0
+
+  # ── Charts (stats screen) ─────────────────────────────────
+  fl_chart: ^0.68.0
+
+  # ── Misc ──────────────────────────────────────────────────
+  equatable: ^2.0.5
+  collection: ^1.18.0
+
+# ─────────────────────────────────────────────────────────────
+#  DEV DEPENDENCIES
+# ─────────────────────────────────────────────────────────────
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
+  mocktail: ^1.0.4
+
+# ─────────────────────────────────────────────────────────────
+#  FLUTTER CONFIG
+# ─────────────────────────────────────────────────────────────
+
+flutter:
+  uses-material-design: true
+
+  # Active la génération des fichiers de localisation (flutter gen-l10n)
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins-Regular.ttf
+  #       - asset: assets/fonts/Poppins-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/Poppins-Bold.ttf
+  #         weight: 700
