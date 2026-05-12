@@ -1,0 +1,36 @@
+# l10n.yaml
+#
+# Configuration de la localisation Flutter (flutter gen-l10n).
+#
+# Langues supportées :
+#   - fr (français)  → langue par défaut 
+#   - nl (néerlandais) 
+#   - en (anglais)   → fallback international
+#
+# Fichiers source : lib/l10n/app_*.arb
+# Fichiers générés : lib/l10n/generated/ 
+#
+# Pour regénérer : flutter gen-l10n
+# Les classes AppLocalizations sont accessibles via context.l10n (extension)
+
+arb-dir: lib/l10n
+template-arb-file: app_fr.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+output-dir: lib/l10n/generated
+
+# Préfère les délégués nommés pour faciliter l'import
+synthetic-package: false
+
+# Active le mode nullable pour les messages optionnels
+nullable-getter: false
+
+# Formate les fichiers générés
+format: true
+
+# Utilise le déferred loading pour réduire la taille du bundle web
+# (désactivé en mobile — charger toutes les langues au démarrage)
+use-deferred-loading: false
+
+# Inclure les descriptions dans le code généré (utile pour les traducteurs)
+gen-inputs-and-outputs-list: l10n_inputs_and_outputs.txt
