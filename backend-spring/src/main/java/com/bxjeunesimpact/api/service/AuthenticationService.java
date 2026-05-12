@@ -3,8 +3,12 @@ package com.bxjeunesimpact.api.service;
 import com.bxjeunesimpact.api.dto.request.AuthenticationRequest;
 import com.bxjeunesimpact.api.dto.request.UserCreateRequest;
 import com.bxjeunesimpact.api.dto.response.AuthenticationResponse;
+import com.bxjeunesimpact.api.dto.response.UserResponse;
+import com.bxjeunesimpact.api.entity.RefreshToken;
 import com.bxjeunesimpact.api.entity.User;
 import com.bxjeunesimpact.api.entity.enums.Role;
+import com.bxjeunesimpact.api.mapper.UserMapper;
+import com.bxjeunesimpact.api.repository.RefreshTokenRepository;
 import com.bxjeunesimpact.api.repository.UserRepository;
 import com.bxjeunesimpact.api.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final UserMapper userMapper;
 
     public AuthenticationResponse register(UserCreateRequest request) {
         // Vérification si l'email existe déjà
@@ -39,28 +45,51 @@ public class AuthenticationService {
         user.setRoles(Set.of(Role.YOUTH)); // Rôle par défaut
         user.setActive(true);
 
-        userRepository.save(user);
+        user = userRepository.save(user);
 
         // Génération des tokens
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-        return new AuthenticationResponse(jwtToken, refreshToken, user.getEmail(), user.getId());
+        // Sauvegarde du Refresh Token en BDD pour ce nouvel utilisateur
+        RefreshToken rt = new RefreshToken();
+        rt.setToken(refreshToken);
+        rt.setExpiryDate(java.time.Instant.now().plusMillis(604800000L)); // 7 jours
+        rt.setUser(user);
+        refreshTokenRepository.save(rt);
+
+        // On mappe l'entité User vers le DTO UserResponse
+        UserResponse userResponse = userMapper.toResponse(user);
+
+        // On retourne le bon constructeur !
+        return new AuthenticationResponse(userResponse, jwtToken, refreshToken, 900L); // 900s = 15 min
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        // Spring Security s'occupe de vérifier que le mot de passe correspond à l'email
+        // 1. Spring Security s'occupe de vérifier email + mot de passe
+        // S'ils sont faux, cela lance automatiquement une BadCredentialsException (401)
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password())
         );
 
-        // Si on arrive ici, l'utilisateur est authentifié avec succès
+        // 2. Si on arrive ici, les identifiants sont bons. On récupère l'utilisateur.
         var user = userRepository.findByEmail(request.email()).orElseThrow();
 
-        // Génération de nouveaux tokens
+        // 3. Génération des nouveaux tokens
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-        return new AuthenticationResponse(jwtToken, refreshToken, user.getEmail(), user.getId());
+        // 4. Mise à jour du token en base (on supprime l'ancien s'il existe, on crée le nouveau)
+        refreshTokenRepository.deleteByUserId(user.getId());
+        RefreshToken rt = new RefreshToken();
+        rt.setToken(refreshToken);
+        rt.setExpiryDate(java.time.Instant.now().plusMillis(604800000L)); // 7 jours
+        rt.setUser(user);
+        refreshTokenRepository.save(rt);
+
+        // 5. On prépare la réponse avec le UserResponse complet
+        UserResponse userResponse = userMapper.toResponse(user);
+
+        return new AuthenticationResponse(userResponse, jwtToken, refreshToken, 900L); // 900s = 15 min
     }
 }

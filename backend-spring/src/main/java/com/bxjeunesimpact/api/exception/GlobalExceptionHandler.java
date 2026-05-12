@@ -60,6 +60,14 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", "Authentification requise ou invalide", request.getRequestURI());
     }
 
+    // --- 401 UNAUTHORIZED (Mauvais identifiants spécifiques) ---
+    @ExceptionHandler(org.springframework.security.authentication.BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentialsException(org.springframework.security.authentication.BadCredentialsException ex, HttpServletRequest request) {
+        log.warn("Échec de connexion (401) sur {} : {}", request.getRequestURI(), ex.getMessage());
+        // En sécurité, on dit "Email ou mot de passe" pour ne pas confirmer aux hackers si l'email existe.
+        return buildResponse(HttpStatus.UNAUTHORIZED, "BAD_CREDENTIALS", "Email ou mot de passe incorrect", request.getRequestURI());
+    }
+
     // --- 403 FORBIDDEN (Authentifié mais pas les bons droits) ---
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
