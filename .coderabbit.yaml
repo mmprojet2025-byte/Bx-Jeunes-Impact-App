@@ -1,7 +1,4 @@
-
-
 language: "fr"
-
 reviews:
   high_level_summary: true
   poem: false
@@ -9,7 +6,3 @@ reviews:
   collapse_walkthrough: false
   auto_review:
     enabled: true
-
-path_filters:
-  - "!node_modules/**"
-  - "!dist/**"
