@@ -1,5 +1,15 @@
-language: "fr" 
+
+
+language: "fr"
+
 reviews:
-  profile: "chill" 
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
   auto_review:
     enabled: true
+
+path_filters:
+  - "!node_modules/**"
+  - "!dist/**"
