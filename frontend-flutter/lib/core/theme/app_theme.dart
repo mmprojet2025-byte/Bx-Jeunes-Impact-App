@@ -142,7 +142,7 @@ class AppTheme {
       ),
  
       // ── Cards ──────────────────────────────────────────
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color:     AppColors.surface,
         elevation: 0,
         margin:    EdgeInsets.zero,
@@ -188,7 +188,7 @@ class AppTheme {
       ),
  
       // ── Dialog ────────────────────────────────────────
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: AppColors.surface,
         elevation:       8,
         shape: RoundedRectangleBorder(
