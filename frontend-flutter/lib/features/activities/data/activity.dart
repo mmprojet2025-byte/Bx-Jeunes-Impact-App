@@ -1,127 +1,167 @@
-// Modèle Dart aligné sur :
-//   - Entity  : Activity.java
-//   - DTO     : ActivityResponse.java
-//   - Enum    : ActivityCategory.java
+// Modèles pour la feature Activités.
+//
+// Entités backend mirrorées :
+//   Activity.java         → Activity
+//   Registration.java     → Registration
+//   ActivityCategory.java → ActivityCategory (enum)
+//   RegistrationStatus.java → RegistrationStatus (enum)
+//
+// Champs alignés sur ActivityResponse.java (ce que l'API renvoie réellement).
  
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+ 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/utils/date_helpers.dart';
+ 
+part 'activity.freezed.dart';
+part 'activity.g.dart';
  
 // ── Enum ActivityCategory ─────────────────────────────────────
+// Miroir exact de ActivityCategory.java
  
+@JsonEnum(valueField: 'jsonValue')
 enum ActivityCategory {
-  workshop,   // WORKSHOP  → Atelier
-  training,   // TRAINING  → Formation
-  meeting,    // MEETING   → Réunion
-  outing,     // OUTING    → Sortie
-  event,      // EVENT     → Événement
-  other;      // OTHER     → Autre
+  @JsonValue('WORKSHOP')
+  workshop('WORKSHOP'),
  
-  /// Label français affiché dans l'UI
-  String get label {
-    switch (this) {
-      case ActivityCategory.workshop: return 'Atelier';
-      case ActivityCategory.training: return 'Formation';
-      case ActivityCategory.meeting:  return 'Réunion';
-      case ActivityCategory.outing:   return 'Sortie';
-      case ActivityCategory.event:    return 'Événement';
-      case ActivityCategory.other:    return 'Autre';
-    }
-  }
+  @JsonValue('TRAINING')
+  training('TRAINING'),
  
-  /// Couleur associée à la catégorie
-  Color get color {
-    switch (this) {
-      case ActivityCategory.workshop: return AppColors.orange;
-      case ActivityCategory.training: return AppColors.culture;
-      case ActivityCategory.meeting:  return AppColors.solidarite;
-      case ActivityCategory.outing:   return AppColors.sport;
-      case ActivityCategory.event:    return AppColors.red;
-      case ActivityCategory.other:    return AppColors.autre;
-    }
-  }
+  @JsonValue('MEETING')
+  meeting('MEETING'),
  
-  /// Icône associée
-  IconData get icon {
-    switch (this) {
-      case ActivityCategory.workshop: return Icons.palette_outlined;
-      case ActivityCategory.training: return Icons.school_outlined;
-      case ActivityCategory.meeting:  return Icons.groups_outlined;
-      case ActivityCategory.outing:   return Icons.directions_walk_outlined;
-      case ActivityCategory.event:    return Icons.celebration_outlined;
-      case ActivityCategory.other:    return Icons.event_outlined;
-    }
-  }
+  @JsonValue('OUTING')
+  outing('OUTING'),
  
-  /// Désérialisation depuis la chaîne backend
-  static ActivityCategory fromString(String value) {
-    switch (value.toUpperCase()) {
-      case 'WORKSHOP': return ActivityCategory.workshop;
-      case 'TRAINING': return ActivityCategory.training;
-      case 'MEETING':  return ActivityCategory.meeting;
-      case 'OUTING':   return ActivityCategory.outing;
-      case 'EVENT':    return ActivityCategory.event;
-      default:         return ActivityCategory.other;
-    }
-  }
+  @JsonValue('EVENT')
+  event('EVENT'),
+ 
+  @JsonValue('OTHER')
+  other('OTHER');
+ 
+  const ActivityCategory(this.jsonValue);
+  final String jsonValue;
+ 
+  String get label => switch (this) {
+        ActivityCategory.workshop => 'Atelier',
+        ActivityCategory.training => 'Formation',
+        ActivityCategory.meeting  => 'Réunion',
+        ActivityCategory.outing   => 'Sortie',
+        ActivityCategory.event    => 'Événement',
+        ActivityCategory.other    => 'Autre',
+      };
+ 
+  Color get color => switch (this) {
+        ActivityCategory.workshop => AppColors.orange,
+        ActivityCategory.training => AppColors.culture,
+        ActivityCategory.meeting  => AppColors.solidarite,
+        ActivityCategory.outing   => AppColors.sport,
+        ActivityCategory.event    => AppColors.red,
+        ActivityCategory.other    => AppColors.autre,
+      };
+ 
+  IconData get icon => switch (this) {
+        ActivityCategory.workshop => Icons.palette_outlined,
+        ActivityCategory.training => Icons.school_outlined,
+        ActivityCategory.meeting  => Icons.groups_outlined,
+        ActivityCategory.outing   => Icons.directions_walk_outlined,
+        ActivityCategory.event    => Icons.celebration_outlined,
+        ActivityCategory.other    => Icons.event_outlined,
+      };
 }
  
-// ── Model Activity ────────────────────────────────────────────
+// ── Enum RegistrationStatus ───────────────────────────────────
+// Miroir exact de RegistrationStatus.java
  
-class Activity {
-  final int id;
-  final String name;
-  final String? description;
-  final DateTime date;
-  final ActivityCategory category;
-  final int? groupId;
-  final String? groupName;
+@JsonEnum(valueField: 'jsonValue')
+enum RegistrationStatus {
+  @JsonValue('REGISTERED')
+  registered('REGISTERED'),
  
-  const Activity({
-    required this.id,
-    required this.name,
-    this.description,
-    required this.date,
-    required this.category,
-    this.groupId,
-    this.groupName,
-  });
+  @JsonValue('CANCELLED')
+  cancelled('CANCELLED'),
  
-  // ── Computed ───────────────────────────────────────────────
+  @JsonValue('ATTENDED')
+  attended('ATTENDED'),
  
-  bool get isUpcoming => DateHelpers.isUpcoming(date);
+  @JsonValue('NO_SHOW')
+  noShow('NO_SHOW');
  
-  /// "25 MAI"
-  String get shortDate => DateHelpers.formatShort(date);
+  const RegistrationStatus(this.jsonValue);
+  final String jsonValue;
  
-  /// "25"
-  String get dayNumber => DateHelpers.day(date);
+  String get label => switch (this) {
+        RegistrationStatus.registered => 'Inscrit',
+        RegistrationStatus.cancelled  => 'Annulé',
+        RegistrationStatus.attended   => 'Présent',
+        RegistrationStatus.noShow     => 'Absent',
+      };
  
-  /// "MAI"
-  String get monthAbbr => DateHelpers.monthAbbr(date);
+  bool get isActive => this == RegistrationStatus.registered;
+}
  
-  /// "25 Mai 2024 • 14:00"
-  String get fullDateTime => DateHelpers.formatDateTime(date);
+// ── Activity ──────────────────────────────────────────────────
+// Aligné sur ActivityResponse.java
  
-  // ── Serialization ──────────────────────────────────────────
+@freezed
+class Activity with _$Activity {
+  const Activity._();
  
-  factory Activity.fromJson(Map<String, dynamic> json) => Activity(
-    id:          json['id'] as int,
-    name:        json['name'] as String,
-    description: json['description'] as String?,
-    date:        DateTime.parse(json['date'] as String),
-    category:    ActivityCategory.fromString(json['category'] as String),
-    groupId:     json['groupId'] as int?,
-    groupName:   json['groupName'] as String?,
-  );
+  const factory Activity({
+    required int id,
  
-  Map<String, dynamic> toJson() => {
-    'id':          id,
-    'name':        name,
-    'description': description,
-    'date':        date.toIso8601String(),
-    'category':    category.name.toUpperCase(),
-    'groupId':     groupId,
-    'groupName':   groupName,
-  };
+    /// Nom de l'activité (max 150 chars côté backend)
+    required String name,
+ 
+    String? description,
+ 
+    /// Date/heure de l'activité — LocalDateTime sérialisé en ISO-8601
+    required DateTime date,
+ 
+    required ActivityCategory category,
+ 
+    /// Groupe organisateur (null = activité ASBL générale)
+    int? groupId,
+    String? groupName,
+ 
+    DateTime? createdAt,
+ 
+    @Default(true) bool active,
+  }) = _Activity;
+ 
+  factory Activity.fromJson(Map<String, dynamic> json) =>
+      _$ActivityFromJson(json);
+ 
+  // ── Computed ─────────────────────────────────────────────
+  bool get isUpcoming => date.isAfter(DateTime.now());
+  bool get isPast     => date.isBefore(DateTime.now());
+}
+ 
+// ── Registration ──────────────────────────────────────────────
+// Miroir de Registration.java — association User ↔ Activity
+ 
+@freezed
+class Registration with _$Registration {
+  const Registration._();
+ 
+  const factory Registration({
+    required int id,
+ 
+    /// ID de l'utilisateur inscrit
+    required int userId,
+ 
+    /// Activité concernée (embedded dans la réponse API)
+    required Activity activity,
+ 
+    DateTime? registrationDate,
+ 
+    @Default(RegistrationStatus.registered) RegistrationStatus status,
+  }) = _Registration;
+ 
+  factory Registration.fromJson(Map<String, dynamic> json) =>
+      _$RegistrationFromJson(json);
+ 
+  bool get isUpcomingActive =>
+      status.isActive && activity.isUpcoming;
 }
