@@ -4,9 +4,18 @@ import 'core/theme/app_theme.dart';
 import 'core/router/route_names.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
 import 'features/dashboard/presentation/screens/home_screen.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
  
+import 'app.dart';
+
 void main() {
-  runApp(const BxJeunesApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const ProviderScope(
+      child: BxJeunesApp(),
+    ),
+  );
 }
  
 class BxJeunesApp extends StatelessWidget {
