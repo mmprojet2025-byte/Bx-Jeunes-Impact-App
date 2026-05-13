@@ -63,7 +63,7 @@ class AppUser with _$AppUser {
  
   String get fullName => '$firstName $lastName';
  
-  bool get hasRole(Role r) => roles.contains(r);
+  bool hasRole(Role r) => roles.contains(r);
   bool get isAdmin        => roles.contains(Role.admin) || roles.contains(Role.superAdmin);
   bool get isReferent     => roles.contains(Role.groupReferent);
   bool get isYouth        => roles.contains(Role.youth);
