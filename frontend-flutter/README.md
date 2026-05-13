@@ -267,3 +267,106 @@ flutter build web \
 ---
 
 *Bx-Jeunes Impact — v1.0.0*
+
+# 🎨 Charte graphique — Bx-Jeunes Impact
+
+## Couleurs ASBL
+
+Les 3 couleurs officielles de l'ASBL. **Ne jamais hardcoder leurs hex dans les widgets** — utiliser les constantes `AppColors`.
+
+| Constante | Hex | Usage |
+|---|---|---|
+| `AppColors.primary` / `AppColors.red` | `#E8251A` | Boutons, AppBar accents, liens actifs, nav bar active |
+| `AppColors.secondary` / `AppColors.orange` | `#F5A623` | Badges partenaires, éléments secondaires, blob décoratif |
+| `AppColors.tertiary` / `AppColors.yellow` | `#FFBF47` | Dégradés, illustrations, reflets |
+
+> ⚠️ Ces codes hex sont à confirmer avec l'ASBL. Une fois validés, modifier uniquement `app_colors.dart` — tout le reste se met à jour automatiquement.
+
+---
+
+## Couleurs sémantiques
+
+| Constante | Hex | Usage |
+|---|---|---|
+| `AppColors.success` | `#27AE60` | Confirmations, statuts validés, présences |
+| `AppColors.error` | `#E74C3C` | Erreurs formulaire, statuts refusés |
+| `AppColors.warning` | `#F39C12` | Alertes, statuts en attente |
+| `AppColors.info` | `#2E86C1` | Informations, aide contextuelle |
+
+---
+
+## Statuts projets
+
+| Constante | Couleur | Statut backend |
+|---|---|---|
+| `AppColors.enCours` | vert | `VALIDATED_BY_REFERENT`, `VALIDATED_BY_ADMIN`, `VISIBLE_TO_PARTNERS` |
+| `AppColors.enAttente` | orange | `PENDING`, `TRANSMITTED_TO_ADMIN` |
+| `AppColors.refuse` | rouge | `REFUSED_BY_REFERENT`, `REFUSED_BY_ADMIN` |
+| `AppColors.valide` | vert clair | `VALIDATED_BY_ADMIN` |
+| `AppColors.brouillon` | gris | brouillon non soumis |
+
+---
+
+## Typographie
+
+Police : **Inter** (Google Fonts) — fallback système `SF Pro Display` / `Roboto`.
+
+| Classe | Taille | Poids | Usage |
+|---|---|---|---|
+| `AppTypography.h1` | 30px | Bold | Logo, titre page login |
+| `AppTypography.h2` | 24px | Bold | Titre de page (Bonjour !) |
+| `AppTypography.h3` | 18px | Bold | En-têtes de section |
+| `AppTypography.h4` | 16px | SemiBold | Titres de card, sous-titres |
+| `AppTypography.h5` | 14px | SemiBold | Noms dans les cards |
+| `AppTypography.bodyLarge` | 16px | Regular | Descriptions longues |
+| `AppTypography.body` | 14px | Regular | Texte courant |
+| `AppTypography.bodySmall` | 13px | Regular | Dates, lieux, metadata |
+| `AppTypography.label` | 14px | Medium | Labels formulaire |
+| `AppTypography.button` | 16px | Bold | Texte de bouton |
+| `AppTypography.caption` | 11px | Regular | Labels nav bar, badges |
+| `AppTypography.link` | 14px | Medium | Liens cliquables |
+
+---
+
+## Règles d'implémentation
+
+### ✅ Correct
+```dart
+// Toujours utiliser les constantes
+Container(color: AppColors.primary)
+Text('Bonjour', style: AppTypography.h2)
+Text('...', style: AppTypography.body.copyWith(color: AppColors.textSecondary))
+```
+
+### ❌ Interdit
+```dart
+// Ne JAMAIS hardcoder une couleur dans un widget
+Container(color: Color(0xFFE8251A))  // ← INTERDIT
+Text('...', style: TextStyle(fontSize: 24, color: Color(0xFF1A1A1A)))  // ← INTERDIT
+```
+
+---
+
+## Ajouter la police Inter (optionnel mais recommandé)
+
+```yaml
+# pubspec.yaml
+dependencies:
+  google_fonts: ^6.2.1
+```
+
+```dart
+// app_theme.dart
+import 'package:google_fonts/google_fonts.dart';
+
+ThemeData get light => ThemeData(
+  textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
+  ...
+)
+```
+
+---
+
+## Dark mode
+
+Reporté en **V2**. Le fichier `app_theme.dart` contient un placeholder commenté `static ThemeData get dark { ... }` prêt à être implémenté.

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -127,7 +129,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: 'Mes activités à venir',
         activities: isLoading
             ? null
-            : data!.nextThreeRegistrations.map((r) => r.activity).toList(),
+            : data!.nextThreeRegistrations
+            .map((r) => r.activity)
+            .toList(),
         emptyTitle:       'Aucune activité à venir',
         emptySubtitle:    'Parcourez le catalogue et inscrivez-vous !',
         emptyActionLabel: 'Voir les activités',
