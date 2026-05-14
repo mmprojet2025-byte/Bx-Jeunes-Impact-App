@@ -1,29 +1,34 @@
 // Widget racine de l'application.
-// Câble le navigatorKey Riverpod dans MaterialApp pour que
-// RefreshInterceptor puisse naviguer vers /login sans BuildContext.
+//
+// Changement par rapport à la version précédente :
+//   - Utilise MaterialApp.router + GoRouter (via routerProvider)
+//   - Plus besoin de navigatorKey ici (go_router gère sa propre clé)
+//   - navigatorKey reste exposé via navigatorKeyProvider pour RefreshInterceptor
  
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
  
-import 'core/router/app_router.dart';
-import 'core/router/route_names.dart';
+import 'core/router/router_provider.dart';
 import 'core/theme/app_theme.dart';
-import 'shared/providers/api_service_provider.dart';
  
 class BxJeunesApp extends ConsumerWidget {
   const BxJeunesApp({super.key});
  
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
+    final router = ref.watch(routerProvider);
+ 
+    return MaterialApp.router(
       title: 'Bx-Jeunes Impact',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      // ↓ Même clé que celle injectée dans RefreshInterceptor
-      navigatorKey: ref.read(navigatorKeyProvider),
-      initialRoute: RouteNames.login,
-      onGenerateRoute: AppRouter.generateRoute,
+      routerConfig: router,
+      // Localisation
+      supportedLocales: const [
+        Locale('fr'),
+        Locale('nl'),
+        Locale('en'),
+      ],
     );
   }
-}
- 
+} 

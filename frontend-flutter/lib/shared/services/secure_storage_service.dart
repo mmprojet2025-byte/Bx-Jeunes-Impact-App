@@ -14,7 +14,7 @@ import '../../core/utils/logger.dart';
  
 abstract class SecureStorageService {
   // ── Instance Dio configurée ───────────────────────────────
-  static const _storage = FlutterSecureStorage(
+  static final _storage = FlutterSecureStorage(
     // Android : AES-256 via EncryptedSharedPreferences (Jetpack Security)
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
     // iOS : Keychain, accessible uniquement quand l'app est déverrouillée
