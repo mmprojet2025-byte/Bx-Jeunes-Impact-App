@@ -1,36 +1,62 @@
-# l10n.yaml
-#
+
 # Configuration de la localisation Flutter (flutter gen-l10n).
 #
-# Langues supportées :
-#   - fr (français)  → langue par défaut 
-#   - nl (néerlandais) 
-#   - en (anglais)   → fallback international
+# ═══════════════════════════════════════════════════════════════
+#  LANGUES SUPPORTÉES
+# ═══════════════════════════════════════════════════════════════
 #
-# Fichiers source : lib/l10n/app_*.arb
-# Fichiers générés : lib/l10n/generated/ 
+#   fr  Français    → langue par DÉFAUT (Bruxelles francophone)
+#                     Toutes les chaînes doivent être présentes
+#   nl  Nederlands  → V2 — fichier présent mais vide en V1
+#   en  English     → Fallback international — vide en V1
 #
-# Pour regénérer : flutter gen-l10n
-# Les classes AppLocalizations sont accessibles via context.l10n (extension)
+# Bruxelles est officiellement bilingue FR/NL (Communes bruxelloises).
+# L'externalisation dès V1 évite un refactoring lourd en V2.
+#
+# ═══════════════════════════════════════════════════════════════
+#  COMMANDES
+# ═══════════════════════════════════════════════════════════════
+#
+#   Générer les fichiers Dart :
+#     flutter gen-l10n
+#
+#   Usage dans un widget :
+#     import 'package:bx_jeunes_impact/l10n/generated/app_localizations.dart';
+#     final l10n = AppLocalizations.of(context)!;
+#     Text(l10n.loginTitle)
+#
+#   Ou via l'extension (voir lib/core/extensions/context_extensions.dart) :
+#     Text(context.l10n.loginTitle)
+#
+# ═══════════════════════════════════════════════════════════════
 
+# Dossier contenant les fichiers .arb source
 arb-dir: lib/l10n
+
+# Fichier template (la langue de référence — toutes les clés y sont définies)
 template-arb-file: app_fr.arb
+
+# Nom du fichier Dart généré
 output-localization-file: app_localizations.dart
+
+# Nom de la classe générée
 output-class: AppLocalizations
+
+# Dossier de sortie des fichiers .dart générés
+# ⚠️  Ne pas committer lib/l10n/generated/ si vous utilisez CI/CD
 output-dir: lib/l10n/generated
 
-# Préfère les délégués nommés pour faciliter l'import
+# false = les fichiers générés sont dans lib/l10n/generated/
+# (pas dans un package séparé)
 synthetic-package: false
 
-# Active le mode nullable pour les messages optionnels
-nullable-getter: false
+# false = AppLocalizations.of(context) retourne AppLocalizations?
+# (null si le widget n'est pas sous MaterialApp avec les delegates)
+nullable-getter: true
 
-# Formate les fichiers générés
+# Formate les fichiers .dart générés avec dart format
 format: true
 
-# Utilise le déferred loading pour réduire la taille du bundle web
-# (désactivé en mobile — charger toutes les langues au démarrage)
+# false = toutes les langues chargées au démarrage (recommandé mobile)
+# true  = chargement différé (recommandé web pour réduire le bundle)
 use-deferred-loading: false
-
-# Inclure les descriptions dans le code généré (utile pour les traducteurs)
-gen-inputs-and-outputs-list: l10n_inputs_and_outputs.txt
