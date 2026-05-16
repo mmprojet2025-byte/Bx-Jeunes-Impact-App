@@ -65,9 +65,9 @@ class AuthInterceptor extends Interceptor {
     handler.next(options);
   }
  
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) =>
-      handler.next(response);
+@override
+void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) =>
+    handler.next(response);
  
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) =>

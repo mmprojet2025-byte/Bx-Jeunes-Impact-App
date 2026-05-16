@@ -38,6 +38,10 @@ abstract class AppConfig {
     defaultValue: 'http://10.0.2.2:8080', // Android emulator → localhost host machine
                                             // iOS simulator    → utilise http://localhost:8080
   );
+  static String get baseUrl => const String.fromEnvironment(
+        'API_BASE_URL',
+        defaultValue: 'https://api.example.com',
+      );
  
   /// URL complète avec suffixe /api
   /// Exemple : "https://bxji-back-dev.onrender.com/api"

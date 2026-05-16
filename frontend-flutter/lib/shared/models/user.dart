@@ -1,49 +1,75 @@
+// Miroir de UserResponse.java + champs RGPD (dateOfBirth, parentalConsent)
+// anticipant l'UML révisé à venir.
+//
+// Génération :
+//   flutter pub run build_runner build --delete-conflicting-outputs
+ 
+import 'package:freezed_annotation/freezed_annotation.dart';
+ 
 import 'role.dart';
  
-class AppUser {
-  final int         id;
-  final String      email;
-  final String      firstName;
-  final String      lastName;
-  final Set<Role>   roles;
-  final int?        groupId;
-  final String?     groupName;
-  final bool        active;
-  final DateTime?   dateOfBirth;
-  final bool        parentalConsent;
-  final String?     parentEmail;
-  final DateTime?   createdAt;
+part 'user.freezed.dart';
+part 'user.g.dart';
  
-  const AppUser({
-    required this.id,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    this.roles           = const {},
-    this.groupId,
-    this.groupName,
-    this.active          = true,
-    this.dateOfBirth,
-    this.parentalConsent = false,
-    this.parentEmail,
-    this.createdAt,
-  });
+@freezed
+class AppUser with _$AppUser {
+  const AppUser._(); // ← permet d'ajouter des méthodes dans l'extension
  
-  // ── Computed ──────────────────────────────────────────────
+  const factory AppUser({
+    required int id,
+    required String email,
+    required String firstName,
+    required String lastName,
  
-  String get fullName    => '$firstName $lastName';
-  String get displayName => '$firstName ${lastName.isNotEmpty ? lastName[0].toUpperCase() : ""}.';
+    /// Ensemble des rôles — miroir de Set<Role> côté backend
+    @Default(<Role>{}) Set<Role> roles,
+ 
+    /// Groupe de rattachement (null si pas encore assigné)
+    int? groupId,
+    String? groupName,
+ 
+    /// Soft delete : false = compte désactivé
+    @Default(true) bool active,
+ 
+    // ── Champs RGPD (UML révisé) ──────────────────────────
+    /// Date de naissance — requis pour vérifier la minorité
+    DateTime? dateOfBirth,
+ 
+    /// Consentement parental (obligatoire pour les mineurs)
+    @Default(false) bool parentalConsent,
+ 
+    /// Email du parent/tuteur (si mineur)
+    String? parentEmail,
+ 
+    // ── Timestamps ────────────────────────────────────────
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) = _AppUser;
+ 
+  factory AppUser.fromJson(Map<String, dynamic> json) =>
+      _$AppUserFromJson(json);
+ 
+  // ── Computed properties ───────────────────────────────────
+ 
+  /// "Jean D."
+  String get displayName => '$firstName ${lastName[0].toUpperCase()}.';
+ 
+  /// "JD" pour l'avatar initiales
   String get initials {
     final f = firstName.isNotEmpty ? firstName[0].toUpperCase() : '';
     final l = lastName.isNotEmpty  ? lastName[0].toUpperCase()  : '';
     return '$f$l';
   }
  
-  bool get isAdmin    => roles.contains(Role.admin) || roles.contains(Role.superAdmin);
-  bool get isReferent => roles.contains(Role.groupReferent);
-  bool get isYouth    => roles.contains(Role.youth);
-  bool get isPartner  => roles.contains(Role.partner);
+  String get fullName => '$firstName $lastName';
  
+  bool hasRole(Role r) => roles.contains(r);
+  bool get isAdmin        => roles.contains(Role.admin) || roles.contains(Role.superAdmin);
+  bool get isReferent     => roles.contains(Role.groupReferent);
+  bool get isYouth        => roles.contains(Role.youth);
+  bool get isPartner      => roles.contains(Role.partner);
+ 
+  /// Rôle principal affiché dans l'UI (priorité : superAdmin > admin > referent > pm > partner > youth)
   Role get primaryRole {
     if (roles.contains(Role.superAdmin))     return Role.superAdmin;
     if (roles.contains(Role.admin))          return Role.admin;
@@ -53,62 +79,13 @@ class AppUser {
     return Role.youth;
   }
  
+  /// Vrai si l'utilisateur a moins de 18 ans
   bool get isMinor {
     if (dateOfBirth == null) return false;
-    final now = DateTime.now();
-    final age = now.year - dateOfBirth!.year;
+    final now  = DateTime.now();
+    final age  = now.year - dateOfBirth!.year;
     final hadBirthday = now.month > dateOfBirth!.month ||
         (now.month == dateOfBirth!.month && now.day >= dateOfBirth!.day);
     return (hadBirthday ? age : age - 1) < 18;
   }
- 
-  // ── Serialization ─────────────────────────────────────────
- 
-  factory AppUser.fromJson(Map<String, dynamic> json) => AppUser(
-    id:              json['id'] as int,
-    email:           json['email'] as String,
-    firstName:       json['firstName'] as String,
-    lastName:        json['lastName'] as String,
-    roles:           ((json['roles'] as List?) ?? [])
-        .map((r) => Role.fromString(r as String))
-        .toSet(),
-    groupId:         json['groupId']       as int?,
-    groupName:       json['groupName']     as String?,
-    active:          json['active']        as bool? ?? true,
-    dateOfBirth:     json['dateOfBirth']   != null
-        ? DateTime.tryParse(json['dateOfBirth'] as String) : null,
-    parentalConsent: json['parentalConsent'] as bool? ?? false,
-    parentEmail:     json['parentEmail']   as String?,
-    createdAt:       json['createdAt']     != null
-        ? DateTime.tryParse(json['createdAt'] as String) : null,
-  );
- 
-  Map<String, dynamic> toJson() => {
-    'id':             id,
-    'email':          email,
-    'firstName':      firstName,
-    'lastName':       lastName,
-    'roles':          roles.map((r) => r.jsonValue).toList(),
-    'groupId':        groupId,
-    'groupName':      groupName,
-    'active':         active,
-    'dateOfBirth':    dateOfBirth?.toIso8601String(),
-    'parentalConsent': parentalConsent,
-    'parentEmail':    parentEmail,
-  };
- 
-  AppUser copyWith({
-    String? firstName, String? lastName, String? email,
-    Set<Role>? roles, int? groupId, String? groupName,
-  }) => AppUser(
-    id: id, active: active, createdAt: createdAt,
-    dateOfBirth: dateOfBirth, parentalConsent: parentalConsent,
-    parentEmail: parentEmail,
-    firstName:  firstName  ?? this.firstName,
-    lastName:   lastName   ?? this.lastName,
-    email:      email      ?? this.email,
-    roles:      roles      ?? this.roles,
-    groupId:    groupId    ?? this.groupId,
-    groupName:  groupName  ?? this.groupName,
-  );
 }

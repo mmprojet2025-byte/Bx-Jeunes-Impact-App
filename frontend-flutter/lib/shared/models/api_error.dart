@@ -1,18 +1,3 @@
-// Miroir exact de ErrorResponse.java (exception/ErrorResponse.java).
-//
-// Format JSON renvoyé par le GlobalExceptionHandler Spring :
-// {
-//   "timestamp": "2024-05-25T14:00:00",
-//   "status": 404,
-//   "error": "Not Found",
-//   "code": "RESOURCE_NOT_FOUND",
-//   "message": "Activité introuvable",
-//   "path": "/api/activities/99",
-//   "fieldErrors": [          // présent uniquement sur les 400/422
-//     { "field": "email", "message": "Format invalide" }
-//   ]
-// }
- 
 import 'package:freezed_annotation/freezed_annotation.dart';
  
 part 'api_error.freezed.dart';

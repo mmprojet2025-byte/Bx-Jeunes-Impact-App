@@ -49,6 +49,9 @@ abstract class AppColors {
   /// Jaune clair — backgrounds légers, hover states
   static const Color tertiaryLight   = Color(0xFFFFF8E1);
  
+  
+static const Color orangeLight = Color(0xFFFFB84D); // Add this line
+
   // ════════════════════════════════════════════════════════
   //  COULEURS SÉMANTIQUES
   // ════════════════════════════════════════════════════════
@@ -189,4 +192,9 @@ abstract class AppColors {
   static const Color envLocal  = Color(0xFFFF9800); // orange Material
   static const Color envDev    = Color(0xFF2196F3); // bleu Material
   static const Color envOther  = Color(0xFF9E9E9E); // gris
+  static const TextStyle envBadgeTextStyle = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+  );  
 }
