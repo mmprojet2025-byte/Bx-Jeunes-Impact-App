@@ -60,5 +60,7 @@ enum Role {
       this == Role.superAdmin ||
       this == Role.groupReferent ||
       this == Role.projectManager;
+
+  static Object? fromString(String r) {}
 }
  

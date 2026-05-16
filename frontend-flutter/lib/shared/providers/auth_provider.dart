@@ -96,7 +96,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
  
       if (accessToken == null || accessToken.isEmpty) {
         AppLogger.info('autoInit: no token found → unauthenticated', tag: 'AuthProvider');
-        state = const AuthState.unauthenticated();
+        state = AuthState.unauthenticated();
         return;
       }
  
@@ -135,12 +135,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
  
       // Tout a échoué → déconnecter
       await SecureStorageService.clearAll();
-      state = const AuthState.unauthenticated();
+      state =  AuthState.unauthenticated();
       AppLogger.info('autoInit: refresh failed → unauthenticated', tag: 'AuthProvider');
  
     } catch (e, st) {
       AppLogger.error('autoInit error', error: e, stackTrace: st, tag: 'AuthProvider');
-      state = const AuthState.unauthenticated();
+      state =  AuthState.unauthenticated();
     }
   }
  
@@ -182,7 +182,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await SecureStorageService.clearAll();
  
     // 3. Mettre à jour le state
-    state = const AuthState.unauthenticated();
+    state = AuthState.unauthenticated();
     AppLogger.info('logout: done', tag: 'AuthProvider');
   }
  

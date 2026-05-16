@@ -10,9 +10,8 @@ import 'package:bx_jeunes_impact/core/router/screens/not_found_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
- 
+
 import '../../shared/providers/auth_provider.dart';
-import '../../shared/models/role.dart';
 import 'app_router.dart';
 import 'route_names.dart';
  

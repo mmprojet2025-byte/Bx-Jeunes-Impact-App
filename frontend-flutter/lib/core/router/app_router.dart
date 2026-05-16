@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/activities/presentation/screens/activity_details_screen.dart';
 import '../../features/activities/presentation/screens/activity_form_screen.dart';
-// Activities — FIX: activity_details_screen (with 's'), not activity_detail_screen
 import '../../features/activities/presentation/screens/activity_list_screen.dart';
 import '../../features/activities/presentation/screens/attendance_screen.dart';
 import '../../features/admin/presentation/screens/notifications_screen.dart';
