@@ -55,7 +55,7 @@ class ApiError with _$ApiError implements Exception {
     String? path,
  
     /// Erreurs de validation par champ (présentes uniquement sur 400/422)
-    @Default(<FieldError>[]) List<FieldError> fieldErrors, required int statusCode,
+    @Default(<FieldError>[]) List<FieldError> fieldErrors,
   }) = _ApiError;
  
   factory ApiError.fromJson(Map<String, dynamic> json) =>
