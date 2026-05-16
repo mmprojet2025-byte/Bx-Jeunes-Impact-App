@@ -438,9 +438,9 @@ abstract class AppRouter {
       name: RouteNames.notifications,
       pageBuilder: (context, state) => _slidePage(
         state: state,
-        child: const _RoleGuard(
-          requiredRoles: {Role.admin, Role.superAdmin},
-          child: NotificationsScreen(),
+        child: _RoleGuard(
+          requiredRoles: const {Role.admin, Role.superAdmin},
+          child: const NotificationsScreen(),
         ),
       ),
     ),
