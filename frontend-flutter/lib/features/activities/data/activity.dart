@@ -114,12 +114,8 @@ class Activity with _$Activity {
     /// Nom de l'activité (max 150 chars côté backend)
     required String name,
  
-    String? description,
- 
     /// Date/heure de l'activité — LocalDateTime sérialisé en ISO-8601
-    required DateTime date,
- 
-    required ActivityCategory category,
+    required DateTime date, required ActivityCategory category, String? description,
  
     /// Groupe organisateur (null = activité ASBL générale)
     int? groupId,

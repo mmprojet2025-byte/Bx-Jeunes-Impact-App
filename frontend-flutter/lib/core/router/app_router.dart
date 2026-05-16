@@ -468,7 +468,6 @@ abstract class AppRouter {
       CustomTransitionPage<void>(
         key: state.pageKey,
         child: child,
-        transitionDuration: const Duration(milliseconds: 300),
         transitionsBuilder: (_, animation, __, child) =>
             FadeTransition(opacity: animation, child: child),
       );
@@ -480,7 +479,6 @@ abstract class AppRouter {
       CustomTransitionPage<void>(
         key: state.pageKey,
         child: child,
-        transitionDuration: const Duration(milliseconds: 300),
         transitionsBuilder: (_, animation, __, child) => SlideTransition(
           position: Tween(
             begin: const Offset(1.0, 0.0),

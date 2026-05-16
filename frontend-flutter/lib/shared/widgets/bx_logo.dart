@@ -36,7 +36,7 @@ class BxLogo extends StatelessWidget {
               letterSpacing: -.5,
             ),
           ),
-        ]),
+        ],),
       ),
       const SizedBox(height: 10),
       const Text(
@@ -47,7 +47,7 @@ class BxLogo extends StatelessWidget {
           letterSpacing: .3,
         ),
       ),
-    ]);
+    ],);
   }
 }
  
@@ -75,7 +75,7 @@ class _LogoPainter extends CustomPainter {
         Rect.fromCenter(
             center: c.translate(0, r * .88),
             width: r * 1.55,
-            height: r * 1.1),
+            height: r * 1.1,),
         3.14159, 3.14159, true, p,
       );
     }
@@ -109,9 +109,9 @@ class _BlobPainter extends CustomPainter {
     final path = Path()
       ..moveTo(0, s.height * .55)
       ..quadraticBezierTo(
-          s.width * .08, s.height * .18, s.width * .48, s.height * .28)
+          s.width * .08, s.height * .18, s.width * .48, s.height * .28,)
       ..quadraticBezierTo(
-          s.width * .88, s.height * .38, s.width, s.height * .68)
+          s.width * .88, s.height * .38, s.width, s.height * .68,)
       ..quadraticBezierTo(s.width * .78, s.height, s.width * .28, s.height)
       ..quadraticBezierTo(0, s.height, 0, s.height * .55)
       ..close();
@@ -130,4 +130,5 @@ class _BlobPainter extends CustomPainter {
   @override
   bool shouldRepaint(_) => false;
 }
+
  

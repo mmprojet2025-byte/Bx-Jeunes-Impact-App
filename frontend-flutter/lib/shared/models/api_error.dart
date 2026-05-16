@@ -38,11 +38,9 @@ class ApiError with _$ApiError implements Exception {
   const ApiError._();
  
   const factory ApiError({
-    /// Timestamp ISO-8601 de l'erreur
-    DateTime? timestamp,
- 
     /// Code HTTP (400, 401, 403, 404, 409, 422, 500…)
-    required int status,
+    required int status, /// Timestamp ISO-8601 de l'erreur
+    DateTime? timestamp,
  
     /// Libellé HTTP ("Not Found", "Unauthorized"…)
     String? error,

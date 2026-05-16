@@ -22,7 +22,6 @@ class AppTheme {
     // ColorScheme aligné sur la charte ASBL
     final colorScheme = ColorScheme.fromSeed(
       seedColor:    AppColors.primary,
-      brightness:   Brightness.light,
       primary:      AppColors.primary,
       secondary:    AppColors.secondary,
       tertiary:     AppColors.tertiary,
@@ -74,7 +73,7 @@ class AppTheme {
           minimumSize:             const Size(double.infinity, 52),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(12),),
           textStyle: AppTypography.button,
         ),
       ),
@@ -87,7 +86,7 @@ class AppTheme {
           minimumSize: const Size(double.infinity, 52),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(12),),
           textStyle: AppTypography.button.copyWith(color: AppColors.primary),
         ),
       ),
@@ -99,7 +98,7 @@ class AppTheme {
           textStyle: AppTypography.buttonSmall,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8)),
+              borderRadius: BorderRadius.circular(8),),
         ),
       ),
  
@@ -119,24 +118,24 @@ class AppTheme {
         labelStyle:   AppTypography.label,
         errorStyle:   AppTypography.caption.copyWith(color: AppColors.error),
         contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16, vertical: 16),
+            horizontal: 16, vertical: 16,),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide:   BorderSide.none),
+            borderSide:   BorderSide.none,),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide:   BorderSide.none),
+            borderSide:   BorderSide.none,),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide:   const BorderSide(
-                color: AppColors.primary, width: 1.5)),
+                color: AppColors.primary, width: 1.5,),),
         errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide:   const BorderSide(color: AppColors.error)),
+            borderSide:   const BorderSide(color: AppColors.error),),
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide:   const BorderSide(
-                color: AppColors.error, width: 1.5)),
+                color: AppColors.error, width: 1.5,),),
         prefixIconColor: AppColors.textSecondary,
         suffixIconColor: AppColors.textSecondary,
       ),
@@ -147,7 +146,7 @@ class AppTheme {
         elevation: 0,
         margin:    EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14)),
+            borderRadius: BorderRadius.circular(14),),
       ),
  
       // ── Chips ──────────────────────────────────────────
@@ -156,14 +155,14 @@ class AppTheme {
         selectedColor:     AppColors.primary.withOpacity(.12),
         disabledColor:     AppColors.backgroundSecondary,
         labelStyle:        AppTypography.caption.copyWith(
-            color: AppColors.textPrimary),
+            color: AppColors.textPrimary,),
         secondaryLabelStyle: AppTypography.caption.copyWith(
-            color: AppColors.primary),
+            color: AppColors.primary,),
         side:              BorderSide.none,
         padding:           const EdgeInsets.symmetric(
-            horizontal: 10, vertical: 6),
+            horizontal: 10, vertical: 6,),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)),
+            borderRadius: BorderRadius.circular(20),),
       ),
  
       // ── BottomNavigationBar ────────────────────────────
@@ -176,7 +175,7 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         selectedLabelStyle:   TextStyle(
-            fontSize: 10, fontWeight: FontWeight.w600),
+            fontSize: 10, fontWeight: FontWeight.w600,),
         unselectedLabelStyle: TextStyle(fontSize: 10),
       ),
  
@@ -192,46 +191,46 @@ class AppTheme {
         backgroundColor: AppColors.surface,
         elevation:       8,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)),
+            borderRadius: BorderRadius.circular(20),),
         titleTextStyle:   AppTypography.h4,
         contentTextStyle: AppTypography.body.copyWith(
-            color: AppColors.textSecondary),
+            color: AppColors.textSecondary,),
       ),
  
       // ── SnackBar ───────────────────────────────────────
       snackBarTheme: SnackBarThemeData(
         backgroundColor:  AppColors.textPrimary,
         contentTextStyle: AppTypography.body.copyWith(
-            color: AppColors.textOnPrimary),
+            color: AppColors.textOnPrimary,),
         behavior:         SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)),
+            borderRadius: BorderRadius.circular(10),),
         actionTextColor:  AppColors.tertiary,
       ),
  
       // ── Checkbox ───────────────────────────────────────
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
           return Colors.transparent;
         }),
-        checkColor: MaterialStateProperty.all(AppColors.textOnPrimary),
+        checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         side: const BorderSide(color: AppColors.border, width: 1.5),
       ),
  
       // ── Switch ─────────────────────────────────────────
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.surface;
           }
           return AppColors.textSecondary;
         }),
-        trackColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return AppColors.primary;
           }
           return AppColors.border;
@@ -245,7 +244,7 @@ class AppTheme {
       ),
  
       // ── TextTheme ─────────────────────────────────────
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         displayLarge:  AppTypography.h1,
         displayMedium: AppTypography.h2,
         displaySmall:  AppTypography.h3,

@@ -14,11 +14,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? onFieldSubmitted;
  
   const CustomTextField({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.hint,
-    required this.prefixIcon,
+    required this.controller, required this.label, required this.hint, required this.prefixIcon, super.key,
     this.keyboardType = TextInputType.text,
     this.obscure = false,
     this.onToggleObscure,
@@ -34,7 +30,7 @@ class CustomTextField extends StatelessWidget {
           style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary)),
+              color: AppColors.textPrimary,),),
       const SizedBox(height: 8),
       TextFormField(
         controller: controller,
@@ -68,25 +64,25 @@ class CustomTextField extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none),
+              borderSide: BorderSide.none,),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none),
+              borderSide: BorderSide.none,),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: AppColors.red, width: 1.5)),
+              borderSide: const BorderSide(color: AppColors.red, width: 1.5),),
           errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: AppColors.refuse)),
+              borderSide: const BorderSide(color: AppColors.refuse),),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide:
-                  const BorderSide(color: AppColors.refuse, width: 1.5)),
+                  const BorderSide(color: AppColors.refuse, width: 1.5),),
           errorStyle:
               const TextStyle(fontSize: 11.5, color: AppColors.refuse),
         ),
       ),
-    ]);
+    ],);
   }
 }
  

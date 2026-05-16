@@ -31,8 +31,7 @@ typedef ResponsiveWidgetBuilder = Widget Function(
 /// Wraps [LayoutBuilder] and exposes the app's phone/tablet breakpoints.
 class ResponsiveBuilder extends StatelessWidget {
   const ResponsiveBuilder({
-    super.key,
-    required this.builder,
+    required this.builder, super.key,
   });
 
   final ResponsiveWidgetBuilder builder;
@@ -61,9 +60,7 @@ class ResponsiveBuilder extends StatelessWidget {
 /// Convenience widget for choosing between phone and tablet layouts.
 class PhoneTabletLayout extends StatelessWidget {
   const PhoneTabletLayout({
-    super.key,
-    required this.phone,
-    required this.tablet,
+    required this.phone, required this.tablet, super.key,
   });
 
   final WidgetBuilder phone;
@@ -82,9 +79,7 @@ class PhoneTabletLayout extends StatelessWidget {
 /// A sliver list on phone and a two-column sliver grid on tablet.
 class ResponsiveSliverListGrid extends StatelessWidget {
   const ResponsiveSliverListGrid({
-    super.key,
-    required this.itemCount,
-    required this.itemBuilder,
+    required this.itemCount, required this.itemBuilder, super.key,
     this.phoneSpacing = 12,
     this.tabletSpacing = 16,
     this.tabletChildAspectRatio = 1.35,
@@ -128,9 +123,7 @@ class ResponsiveSliverListGrid extends StatelessWidget {
 /// Master/detail layout for tablet, with a stacked detail layout on phone.
 class ResponsiveMasterDetail extends StatelessWidget {
   const ResponsiveMasterDetail({
-    super.key,
-    required this.master,
-    required this.detail,
+    required this.master, required this.detail, super.key,
     this.masterFlex = 4,
     this.detailFlex = 6,
     this.spacing = 16,

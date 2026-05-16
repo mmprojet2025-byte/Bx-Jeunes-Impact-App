@@ -48,7 +48,7 @@ String? _redirect(Ref ref, GoRouterState state) {
   if (isLoading) return null;
  
   final isAuthRoute = _authRoutes.contains(location) ||
-      _authRoutes.any((r) => location.startsWith(r));
+      _authRoutes.any(location.startsWith);
  
   // ── Racine → redirection selon état ──────────────────────
   if (location == RoutePaths.root) {

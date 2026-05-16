@@ -25,9 +25,9 @@ class GroupsCtaBanner extends StatelessWidget {
               margin: const EdgeInsets.only(right: 14),
               decoration: BoxDecoration(
                   color: Colors.white24,
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(10),),
               child: const Icon(Icons.groups_rounded,
-                  color: Colors.white, size: 24),
+                  color: Colors.white, size: 24,),
             ),
             const Expanded(
               child: Text(
@@ -42,8 +42,8 @@ class GroupsCtaBanner extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             const Icon(Icons.arrow_forward_ios,
-                color: Colors.white, size: 16),
-          ]),
+                color: Colors.white, size: 16,),
+          ],),
         ),
       ),
     );

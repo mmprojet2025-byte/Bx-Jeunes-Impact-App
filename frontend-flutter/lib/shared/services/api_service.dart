@@ -42,7 +42,6 @@ class ApiService {
         LogInterceptor(
           requestBody: true,
           responseBody: true,
-          error: true,
           logPrint: (o) => AppLogger.info(o.toString(), tag: 'HTTP'),
         ),
     ]);

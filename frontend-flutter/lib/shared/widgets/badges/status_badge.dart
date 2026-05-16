@@ -28,7 +28,7 @@ extension ProjectStatusExt on ProjectStatus {
 class StatusBadge extends StatelessWidget {
   final ProjectStatus status;
  
-  const StatusBadge({super.key, required this.status});
+  const StatusBadge({required this.status, super.key});
  
   @override
   Widget build(BuildContext context) {

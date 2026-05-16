@@ -6,7 +6,6 @@
 //   Sponsoring.java  → Sponsoring
  
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
  
 part 'partner.freezed.dart';
 part 'partner.g.dart';

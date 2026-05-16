@@ -11,10 +11,7 @@ class QuickActionsGrid extends StatelessWidget {
   final VoidCallback onGroupsTap;
  
   const QuickActionsGrid({
-    super.key,
-    required this.onActivitiesTap,
-    required this.onProjectsTap,
-    required this.onGroupsTap,
+    required this.onActivitiesTap, required this.onProjectsTap, required this.onGroupsTap, super.key,
   });
  
   @override

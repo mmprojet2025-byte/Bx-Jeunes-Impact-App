@@ -47,9 +47,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onRetry: () => ref.refresh(homeProvider),
           ),
           loading: () => _buildContent(
-            data: null, user: currentUser, isTablet: isTablet, isLoading: true),
+            data: null, user: currentUser, isTablet: isTablet, isLoading: true,),
           data: (data) => _buildContent(
-            data: data, user: currentUser, isTablet: isTablet, isLoading: false),
+            data: data, user: currentUser, isTablet: isTablet, isLoading: false,),
         ),
       ),
       bottomNavigationBar: AppBottomNavBar(
@@ -58,9 +58,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           setState(() => _navIndex = i);
           switch (i) {
             // FIX : context.goNamed au lieu de Navigator.pushNamed avec chemins string
-            case 1: context.goNamed(RouteNames.activities); break;
-            case 2: context.goNamed(RouteNames.projects);   break;
-            case 3: context.goNamed(RouteNames.profile);    break;
+            case 1: context.goNamed(RouteNames.activities);
+            case 2: context.goNamed(RouteNames.projects);
+            case 3: context.goNamed(RouteNames.profile);
           }
         },
       ),
@@ -84,7 +84,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: user != null
                 ? WelcomeBanner(
                     user: user,
-                    notificationCount: 0,
                     // FIX : goNamed au lieu de pushNamed
                     onProfileTap: () => context.goNamed(RouteNames.profile),
                     onNotificationTap: () {},
@@ -152,7 +151,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         onSeeAll:    () => context.goNamed(RouteNames.activities),
         onActivityTap: _openActivityDetail,
       ),
-    ]);
+    ],);
   }
  
   Widget _buildTabletLayout(HomeData? data, bool isLoading) {
@@ -177,7 +176,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onSeeAll:    () => context.goNamed(RouteNames.projects),
             onProjectTap: _openProjectDetail,
           ),
-        ])),
+        ],),),
         const SizedBox(width: 12),
         Expanded(child: UpcomingActivitiesSection(
           title: 'Activités de l\'ASBL',
@@ -186,8 +185,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           emptySubtitle: 'Revenez bientôt.',
           onSeeAll:    () => context.goNamed(RouteNames.activities),
           onActivityTap: _openActivityDetail,
-        )),
-      ]),
+        ),),
+      ],),
     );
   }
  

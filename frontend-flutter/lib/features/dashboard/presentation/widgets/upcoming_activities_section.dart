@@ -28,9 +28,7 @@ class UpcomingActivitiesSection extends StatelessWidget {
   final void Function(Activity)? onActivityTap;
  
   const UpcomingActivitiesSection({
-    super.key,
-    required this.title,
-    required this.activities,
+    required this.title, required this.activities, super.key,
     this.emptyTitle = 'Aucune activité prochaine',
     this.emptySubtitle,
     this.emptyActionLabel,
@@ -63,7 +61,7 @@ class UpcomingActivitiesSection extends StatelessWidget {
         CardSkeleton(),
         CardSkeleton(),
         CardSkeleton(),
-      ]);
+      ],);
     }
  
     // ── Empty ───────────────────────────────────────────
@@ -86,7 +84,7 @@ class UpcomingActivitiesSection extends StatelessWidget {
           .map((a) => _ActivityCard(
                 activity: a,
                 onTap: () => onActivityTap?.call(a),
-              ))
+              ),)
           .toList(),
     );
   }
@@ -174,7 +172,7 @@ class _ActivityCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(Icons.schedule,
-                          size: 12, color: AppColors.textSecondary),
+                          size: 12, color: AppColors.textSecondary,),
                       const SizedBox(width: 4),
                       Text(
                         DateHelpers.formatDateTime(activity.date),
@@ -190,7 +188,7 @@ class _ActivityCard extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.location_on_outlined,
-                            size: 12, color: AppColors.textSecondary),
+                            size: 12, color: AppColors.textSecondary,),
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(

@@ -98,10 +98,8 @@ class Project with _$Project {
     required String title,
     required String description,
  
-    @Default(ProjectStatus.pending) ProjectStatus status,
- 
     /// Créateur du projet
-    required int creatorId,
+    required int creatorId, @Default(ProjectStatus.pending) ProjectStatus status,
     String? creatorName,
  
     /// Groupe porteur (optionnel)

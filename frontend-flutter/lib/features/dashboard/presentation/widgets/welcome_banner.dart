@@ -15,8 +15,7 @@ class WelcomeBanner extends ConsumerWidget {
   final VoidCallback? onProfileTap;
  
   const WelcomeBanner({
-    super.key,
-    required this.user,
+    required this.user, super.key,
     this.notificationCount = 0,
     this.onNotificationTap,
     this.onProfileTap,
@@ -28,7 +27,6 @@ class WelcomeBanner extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
       color: AppColors.white,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // ── Avatar ──────────────────────────────────────
           GestureDetector(
@@ -42,16 +40,16 @@ class WelcomeBanner extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
-                    const Text(
+                    Text(
                       'Bonjour ',
                       style: TextStyle(
                         fontSize: 18,
                         color: AppColors.textPrimary,
                       ),
                     ),
-                    const Text('👋', style: TextStyle(fontSize: 18)),
+                    Text('👋', style: TextStyle(fontSize: 18)),
                   ],
                 ),
                 Text(

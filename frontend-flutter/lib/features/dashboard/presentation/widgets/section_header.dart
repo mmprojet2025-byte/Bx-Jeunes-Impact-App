@@ -6,9 +6,7 @@ class SectionHeader extends StatelessWidget {
   final VoidCallback onSeeAll;
  
   const SectionHeader({
-    super.key,
-    required this.title,
-    required this.onSeeAll,
+    required this.title, required this.onSeeAll, super.key,
   });
  
   @override
@@ -22,14 +20,14 @@ class SectionHeader extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary)),
+                  color: AppColors.textPrimary,),),
           GestureDetector(
             onTap: onSeeAll,
             child: const Text('Voir tout',
                 style: TextStyle(
                     fontSize: 13,
                     color: AppColors.red,
-                    fontWeight: FontWeight.w600)),
+                    fontWeight: FontWeight.w600,),),
           ),
         ],
       ),

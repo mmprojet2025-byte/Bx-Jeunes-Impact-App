@@ -8,13 +8,13 @@ import '../../../../shared/widgets/loaders/loading_indicator.dart';
 class MemberDetailScreen extends StatelessWidget {
   final int memberId;
  
-  const MemberDetailScreen({super.key, required this.memberId});
+  const MemberDetailScreen({required this.memberId, super.key});
  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: CustomAppBar(title: 'Profil du membre'),
+      appBar: const CustomAppBar(title: 'Profil du membre'),
       body: Center(
         child: Text(
           'Membre #$memberId',

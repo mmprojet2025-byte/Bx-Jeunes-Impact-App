@@ -26,7 +26,7 @@ class NotFoundScreen extends StatelessWidget {
               Container(
                 width: 88,
                 height: 88,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.inputBg,
                   shape: BoxShape.circle,
                 ),
@@ -48,10 +48,10 @@ class NotFoundScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
  
-              Text(
+              const Text(
                 'La page que vous cherchez n\'existe pas ou a été déplacée.',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   color: AppColors.textSecondary,
                   height: 1.5,

@@ -11,12 +11,7 @@ class ActivityCardSmall extends StatelessWidget {
   final String imgKey;
  
   const ActivityCardSmall({
-    super.key,
-    required this.title,
-    required this.day,
-    required this.month,
-    required this.location,
-    required this.imgKey,
+    required this.title, required this.day, required this.month, required this.location, required this.imgKey, super.key,
   });
  
   // FIX : utilise les couleurs sémantiques d'AppColors au lieu de Color(0x...)
@@ -66,12 +61,12 @@ class ActivityCardSmall extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: bgColor.withOpacity(.85),
                   borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16)),
+                      top: Radius.circular(16),),
                 ),
                 child: Center(
                   child: Icon(icon,
                       color: AppColors.textOnPrimary.withOpacity(.55),
-                      size: 48),
+                      size: 48,),
                 ),
               ),
               Positioned(
@@ -80,7 +75,7 @@ class ActivityCardSmall extends StatelessWidget {
                   width: 44, height: 44,
                   decoration: BoxDecoration(
                       color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10),),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -88,16 +83,16 @@ class ActivityCardSmall extends StatelessWidget {
                           style: AppTypography.h4.copyWith(
                               color: AppColors.textOnPrimary,
                               fontSize: 16,
-                              height: 1.1)),
+                              height: 1.1,),),
                       Text(month,
                           style: AppTypography.caption.copyWith(
                               color: AppColors.textOnPrimary.withOpacity(.7),
-                              letterSpacing: .5)),
+                              letterSpacing: .5,),),
                     ],
                   ),
                 ),
               ),
-            ]),
+            ],),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -106,14 +101,14 @@ class ActivityCardSmall extends StatelessWidget {
                   Text(title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.h5.copyWith(fontSize: 13)),
+                      style: AppTypography.h5.copyWith(fontSize: 13),),
                   const SizedBox(height: 5),
                   Row(children: [
                     const Icon(Icons.location_on_outlined,
-                        size: 11, color: AppColors.textSecondary),
+                        size: 11, color: AppColors.textSecondary,),
                     const SizedBox(width: 3),
                     Text(location, style: AppTypography.caption),
-                  ]),
+                  ],),
                 ],
               ),
             ),

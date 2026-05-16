@@ -15,8 +15,7 @@ class MyProjectsSection extends StatelessWidget {
   final void Function(Project)? onProjectTap;
  
   const MyProjectsSection({
-    super.key,
-    required this.projects,
+    required this.projects, super.key,
     this.onSeeAll,
     this.onProjectTap,
   });
@@ -60,7 +59,7 @@ class MyProjectsSection extends StatelessWidget {
           .map((p) => _ProjectCard(
                 project: p,
                 onTap: () => onProjectTap?.call(p),
-              ))
+              ),)
           .toList(),
     );
   }
@@ -132,7 +131,7 @@ class _ProjectCard extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.groups_outlined,
-                            size: 12, color: AppColors.textSecondary),
+                            size: 12, color: AppColors.textSecondary,),
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
@@ -157,7 +156,7 @@ class _ProjectCard extends StatelessWidget {
  
             const SizedBox(width: 4),
             const Icon(Icons.chevron_right,
-                size: 18, color: AppColors.textSecondary),
+                size: 18, color: AppColors.textSecondary,),
           ],
         ),
       ),

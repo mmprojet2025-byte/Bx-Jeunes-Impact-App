@@ -17,8 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showEnvBadge;
  
   const CustomAppBar({
-    super.key,
-    required this.title,
+    required this.title, super.key,
     this.showBack = true,
     this.actions,
     this.showEnvBadge = true,

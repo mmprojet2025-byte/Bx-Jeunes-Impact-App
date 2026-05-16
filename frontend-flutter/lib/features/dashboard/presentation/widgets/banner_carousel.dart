@@ -65,7 +65,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                       style: AppTypography.h4.copyWith(
                           color: AppColors.textOnPrimary,
                           fontSize: 17,
-                          height: 1.35)),
+                          height: 1.35,),),
                 ),
                 const SizedBox(width: 12),
                 Container(
@@ -76,9 +76,9 @@ class _BannerCarouselState extends State<BannerCarousel> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(b.icon,
-                      color: AppColors.textOnPrimary, size: 34),
+                      color: AppColors.textOnPrimary, size: 34,),
                 ),
-              ]),
+              ],),
             );
           },
         ),

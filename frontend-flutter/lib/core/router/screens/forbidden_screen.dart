@@ -60,10 +60,10 @@ class ForbiddenScreen extends StatelessWidget {
               const SizedBox(height: 12),
  
               // ── Message ───────────────────────────────────
-              Text(
+              const Text(
                 'Vous n\'avez pas les permissions nécessaires pour accéder à cette page.',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   color: AppColors.textSecondary,
                   height: 1.5,

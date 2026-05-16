@@ -73,7 +73,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 16),
                   const BxLogo(),
@@ -83,13 +82,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text('Créer un compte',
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary)),
+                            color: AppColors.textPrimary,),),
                   ),
                   const SizedBox(height: 4),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Rejoins la communauté Bx-Jeunes Impact',
-                        style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                        style: TextStyle(fontSize: 13, color: AppColors.textSecondary),),
                   ),
                   const SizedBox(height: 24),
  
@@ -99,7 +98,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     label: 'Prénom',
                     hint: 'Jean',
                     prefixIcon: Icons.person_outline,
-                    textInputAction: TextInputAction.next,
                     validator: (v) => (v == null || v.trim().isEmpty) ? 'Prénom requis' : null,
                   ),
                   const SizedBox(height: 14),
@@ -110,7 +108,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     label: 'Nom',
                     hint: 'Dupont',
                     prefixIcon: Icons.person_outline,
-                    textInputAction: TextInputAction.next,
                     validator: (v) => (v == null || v.trim().isEmpty) ? 'Nom requis' : null,
                   ),
                   const SizedBox(height: 14),
@@ -122,11 +119,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     hint: 'exemple@email.com',
                     prefixIcon: Icons.email_outlined,
                     keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
                     validator: (v) {
                       if (v == null || v.trim().isEmpty) return 'Email requis';
-                      if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v.trim()))
+                      if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v.trim())) {
                         return 'Format invalide';
+                      }
                       return null;
                     },
                   ),
@@ -173,8 +170,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         const Icon(Icons.error_outline, color: AppColors.refuse, size: 18),
                         const SizedBox(width: 8),
                         Expanded(child: Text(state.error!,
-                            style: const TextStyle(fontSize: 13, color: AppColors.refuse))),
-                      ]),
+                            style: const TextStyle(fontSize: 13, color: AppColors.refuse),),),
+                      ],),
                     ),
                   ],
                   const SizedBox(height: 28),
@@ -188,14 +185,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
  
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Text('Déjà un compte ? ',
-                        style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                        style: TextStyle(color: AppColors.textSecondary, fontSize: 14),),
                     GestureDetector(
                       onTap: () => context.goNamed(RouteNames.login),
                       child: const Text('Se connecter',
                           style: TextStyle(color: AppColors.red, fontSize: 14,
-                              fontWeight: FontWeight.bold)),
+                              fontWeight: FontWeight.bold,),),
                     ),
-                  ]),
+                  ],),
                   const SizedBox(height: 40),
                 ],
               ),

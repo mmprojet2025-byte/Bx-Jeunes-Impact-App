@@ -85,7 +85,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   child: Form(
                     key: _formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 52),
                         const BxLogo(),
@@ -97,11 +96,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                           hint: 'exemple@email.com',
                           prefixIcon: Icons.email_outlined,
                           keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
                           validator: (v) {
                             if (v == null || v.trim().isEmpty) return 'Email requis';
-                            if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v.trim()))
+                            if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v.trim())) {
                               return 'Format d\'email invalide';
+                            }
                             return null;
                           },
                         ),
@@ -127,7 +126,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                             onTap: _goForgotPassword,
                             child: const Text('Mot de passe oublié ?',
                                 style: TextStyle(color: AppColors.red,
-                                    fontSize: 13, fontWeight: FontWeight.w500)),
+                                    fontSize: 13, fontWeight: FontWeight.w500,),),
                           ),
                         ),
  
@@ -148,15 +147,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                         ),
                         const SizedBox(height: 22),
  
-                        Row(children: [
+                        const Row(children: [
                           Expanded(child: Divider(color: AppColors.border)),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: 14),
                             child: Text('ou', style: TextStyle(
-                                color: AppColors.textSecondary, fontSize: 13)),
+                                color: AppColors.textSecondary, fontSize: 13,),),
                           ),
                           Expanded(child: Divider(color: AppColors.border)),
-                        ]),
+                        ],),
                         const SizedBox(height: 22),
  
                         _GoogleButton(onTap: () {}), // TODO: OAuth
@@ -164,14 +163,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
  
                         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                           const Text('Pas encore de compte ? ',
-                              style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                              style: TextStyle(color: AppColors.textSecondary, fontSize: 14),),
                           GestureDetector(
                             onTap: _goRegister,
                             child: const Text('Créer un compte',
                                 style: TextStyle(color: AppColors.red,
-                                    fontSize: 14, fontWeight: FontWeight.bold)),
+                                    fontSize: 14, fontWeight: FontWeight.bold,),),
                           ),
-                        ]),
+                        ],),
                         const SizedBox(height: 48),
                       ],
                     ),
@@ -180,7 +179,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
               ),
             ),
           ),
-        ]),
+        ],),
       ),
     );
   }
@@ -204,10 +203,10 @@ class _ErrorBanner extends StatelessWidget {
         const Icon(Icons.error_outline, color: AppColors.refuse, size: 18),
         const SizedBox(width: 8),
         Expanded(child: Text(message,
-            style: const TextStyle(fontSize: 13, color: AppColors.refuse))),
+            style: const TextStyle(fontSize: 13, color: AppColors.refuse),),),
         GestureDetector(onTap: onClose,
-            child: const Icon(Icons.close, color: AppColors.refuse, size: 16)),
-      ]),
+            child: const Icon(Icons.close, color: AppColors.refuse, size: 16),),
+      ],),
     );
   }
 }
@@ -232,16 +231,16 @@ class _GoogleButton extends StatelessWidget {
             width: 22, height: 22,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.border, width: 1.5)),
+                border: Border.all(color: AppColors.border, width: 1.5),),
             child: const Center(child: Text('G',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,
-                    color: Color(0xFF4285F4)))),
+                    color: Color(0xFF4285F4),),),),
           ),
           const SizedBox(width: 10),
           const Text('Continuer avec Google',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                  color: AppColors.textPrimary)),
-        ]),
+                  color: AppColors.textPrimary,),),
+        ],),
       ),
     );
   }

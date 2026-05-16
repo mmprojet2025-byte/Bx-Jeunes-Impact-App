@@ -163,7 +163,6 @@ class RefreshInterceptor extends Interceptor {
       req.completer.completeError(
         DioException(
           requestOptions: req.options,
-          type: DioExceptionType.unknown,
           message: 'Token refresh failed',
         ),
       );

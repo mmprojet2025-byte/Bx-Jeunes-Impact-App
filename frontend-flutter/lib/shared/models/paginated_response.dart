@@ -26,7 +26,6 @@
 // Note : freezed ne supporte pas les classes génériques de manière native.
 // On utilise json_serializable manuellement + une classe manuelle immutable.
  
-import 'package:freezed_annotation/freezed_annotation.dart';
  
 class PaginatedResponse<T> {
   final List<T> content;

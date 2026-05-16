@@ -8,12 +8,12 @@ class MemberListScreen extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.background,
       appBar: CustomAppBar(title: 'Membres', showBack: false),
-      body: const Center(
+      body: Center(
         child: Text('Liste des membres — à implémenter',
-            style: TextStyle(color: AppColors.textSecondary)),
+            style: TextStyle(color: AppColors.textSecondary),),
       ),
     );
   }
