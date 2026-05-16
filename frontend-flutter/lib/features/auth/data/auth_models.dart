@@ -1,99 +1,88 @@
-// Miroirs des DTOs auth du backend :
-//   AuthenticationRequest.java  → LoginRequest
-//   UserCreateRequest.java      → RegisterRequest
-//   AuthenticationResponse.java → AuthResponse
-//
-// Règles de validation password (miroir de UserCreateRequest) :
-//   - min 8 caractères
-//   - au moins une majuscule
-//   - au moins un chiffre
- 
-import 'package:freezed_annotation/freezed_annotation.dart';
- 
-part 'auth_models.freezed.dart';
-part 'auth_models.g.dart';
+import '../../../shared/models/user.dart';
  
 // ── LoginRequest ──────────────────────────────────────────────
-// Miroir de AuthenticationRequest.java
  
-@freezed
-class LoginRequest with _$LoginRequest {
-  const factory LoginRequest({
-    required String email,
-    required String password,
-  }) = _LoginRequest;
+class LoginRequest {
+  final String email;
+  final String password;
  
-  factory LoginRequest.fromJson(Map<String, dynamic> json) =>
-      _$LoginRequestFromJson(json);
-}
+  const LoginRequest({required this.email, required this.password});
  
-// ── RegisterRequest ───────────────────────────────────────────
-// Miroir de UserCreateRequest.java
-// groupId optionnel : l'utilisateur peut être assigné à un groupe plus tard.
- 
-@freezed
-class RegisterRequest with _$RegisterRequest {
-  const factory RegisterRequest({
-    required String email,
-    required String password,
-    required String firstName,
-    required String lastName,
- 
-    /// Groupe de rattachement (optionnel à l'inscription)
-    int? groupId,
- 
-    // ── Champs RGPD ───────────────────────────────────────
-    DateTime? dateOfBirth,
- 
-    /// Consentement parental (requis si mineur)
-    @Default(false) bool parentalConsent,
- 
-    /// Email du parent/tuteur (si mineur)
-    String? parentEmail,
-  }) = _RegisterRequest;
- 
-  factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
-      _$RegisterRequestFromJson(json);
+  Map<String, dynamic> toJson() => {
+    'email':    email,
+    'password': password,
+  };
 }
  
 // ── AuthResponse ──────────────────────────────────────────────
-// Miroir de AuthenticationResponse.java
+// Miroir exact de la réponse 200 du backend.
+// Le champ "user" est parsé en AppUser pour mise à jour de authProvider.
  
-@freezed
-class AuthResponse with _$AuthResponse {
-  const factory AuthResponse({
-    required String accessToken,
-    required String refreshToken,
-    required String email,
-    required int userId,
-  }) = _AuthResponse;
+class AuthResponse {
+  final AppUser user;
+  final String  accessToken;
+  final String  refreshToken;
+  final int?    expiresIn;    // secondes — optionnel selon le backend
  
-  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthResponseFromJson(json);
+  const AuthResponse({
+    required this.user,
+    required this.accessToken,
+    required this.refreshToken,
+    this.expiresIn,
+  });
+ 
+  factory AuthResponse.fromJson(Map<String, dynamic> json) {
+    // Le backend peut envoyer "user" directement ou les champs à la racine
+    final userJson = json['user'] as Map<String, dynamic>? ?? json;
+ 
+    return AuthResponse(
+      user:         AppUser.fromJson(userJson),
+      accessToken:  json['accessToken']  as String,
+      refreshToken: json['refreshToken'] as String,
+      expiresIn:    json['expiresIn']    as int?,
+    );
+  }
+}
+ 
+// ── RegisterRequest ───────────────────────────────────────────
+ 
+class RegisterRequest {
+  final String    email;
+  final String    password;
+  final String    firstName;
+  final String    lastName;
+  final int?      groupId;
+  final DateTime? dateOfBirth;
+  final bool      parentalConsent;
+  final String?   parentEmail;
+ 
+  const RegisterRequest({
+    required this.email,
+    required this.password,
+    required this.firstName,
+    required this.lastName,
+    this.groupId,
+    this.dateOfBirth,
+    this.parentalConsent = false,
+    this.parentEmail,
+  });
+ 
+  Map<String, dynamic> toJson() => {
+    'email':            email,
+    'password':         password,
+    'firstName':        firstName,
+    'lastName':         lastName,
+    if (groupId       != null) 'groupId':       groupId,
+    if (dateOfBirth   != null) 'dateOfBirth':   dateOfBirth!.toIso8601String(),
+    'parentalConsent':  parentalConsent,
+    if (parentEmail   != null) 'parentEmail':   parentEmail,
+  };
 }
  
 // ── RefreshRequest ────────────────────────────────────────────
-// Corps envoyé à POST /api/auth/refresh
  
-@freezed
-class RefreshRequest with _$RefreshRequest {
-  const factory RefreshRequest({
-    required String refreshToken,
-  }) = _RefreshRequest;
- 
-  factory RefreshRequest.fromJson(Map<String, dynamic> json) =>
-      _$RefreshRequestFromJson(json);
+class RefreshRequest {
+  final String refreshToken;
+  const RefreshRequest({required this.refreshToken});
+  Map<String, dynamic> toJson() => {'refreshToken': refreshToken};
 }
- 
-// ── ForgotPasswordRequest ─────────────────────────────────────
- 
-@freezed
-class ForgotPasswordRequest with _$ForgotPasswordRequest {
-  const factory ForgotPasswordRequest({
-    required String email,
-  }) = _ForgotPasswordRequest;
- 
-  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) =>
-      _$ForgotPasswordRequestFromJson(json);
-}
- 
