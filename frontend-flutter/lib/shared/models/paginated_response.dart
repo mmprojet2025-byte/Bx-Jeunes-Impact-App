@@ -1,31 +1,4 @@
-// Wrapper générique pour les réponses paginées Spring Boot.
-//
-// Format JSON Spring Page<T> :
-// {
-//   "content": [...],
-//   "totalElements": 42,
-//   "totalPages": 3,
-//   "number": 0,          ← numéro de page (0-indexed)
-//   "size": 20,
-//   "first": true,
-//   "last": false,
-//   "empty": false
-// }
-//
-// Usage dans un repository :
-//   final page = await _api.get<PaginatedResponse<Activity>>(
-//     AppConfig.activitiesEndpoint,
-//     fromJson: (json) => PaginatedResponse.fromJson(
-//       json as Map<String, dynamic>,
-//       (item) => Activity.fromJson(item as Map<String, dynamic>),
-//     ),
-//   );
-//   final activities = page.content;  // List<Activity>
-//   final hasMore    = page.hasMore;  // bool
- 
-// Note : freezed ne supporte pas les classes génériques de manière native.
-// On utilise json_serializable manuellement + une classe manuelle immutable.
- 
+
  
 class PaginatedResponse<T> {
   final List<T> content;
