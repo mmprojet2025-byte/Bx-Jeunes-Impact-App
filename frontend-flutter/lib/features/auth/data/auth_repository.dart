@@ -11,47 +11,50 @@ class AuthRepository {
  
   AuthRepository(this._api);
  
-  /// POST /api/auth/login
+  // ── Login ─────────────────────────────────────────────────
+  // POST /api/auth/login
+  // Lève ApiError(401) si identifiants invalides → intercepté par LoginNotifier.
+ 
   Future<AuthResponse> login(LoginRequest request) =>
       _api.post<AuthResponse>(
         AppConfig.loginEndpoint,
-        body: {'email': request.email, 'password': request.password},
-        fromJson: (json) => AuthResponse.fromJson(json as Map<String, dynamic>),
+        body: request.toJson(),
+        fromJson: (json) =>
+            AuthResponse.fromJson(json as Map<String, dynamic>),
       );
  
-  /// POST /api/auth/register
+  // ── Register ──────────────────────────────────────────────
+ 
   Future<AuthResponse> register(RegisterRequest request) =>
       _api.post<AuthResponse>(
         AppConfig.registerEndpoint,
-        body: {
-          'email':            request.email,
-          'password':         request.password,
-          'firstName':        request.firstName,
-          'lastName':         request.lastName,
-          if (request.groupId != null) 'groupId': request.groupId,
-          if (request.dateOfBirth != null)
-            'dateOfBirth': request.dateOfBirth!.toIso8601String(),
-          'parentalConsent': request.parentalConsent,
-          if (request.parentEmail != null) 'parentEmail': request.parentEmail,
-        },
-        fromJson: (json) => AuthResponse.fromJson(json as Map<String, dynamic>),
+        body: request.toJson(),
+        fromJson: (json) =>
+            AuthResponse.fromJson(json as Map<String, dynamic>),
       );
  
-  /// POST /api/auth/forgot-password
+  // ── Forgot password ───────────────────────────────────────
+  // Retourne void — le backend envoie l'email de réinitialisation.
+ 
   Future<void> forgotPassword(String email) =>
       _api.post<void>(
         AppConfig.forgotPasswordEndpoint,
         body: {'email': email},
       );
  
-  /// GET /api/users/me — récupère le profil de l'utilisateur connecté
+  // ── Get current user ──────────────────────────────────────
+  // Appelé après login pour hydrater authProvider avec le profil complet.
+ 
   Future<AppUser> getMe() =>
       _api.get<AppUser>(
         '${AppConfig.usersEndpoint}/me',
-        fromJson: (json) => AppUser.fromJson(json as Map<String, dynamic>),
+        fromJson: (json) =>
+            AppUser.fromJson(json as Map<String, dynamic>),
       );
 }
  
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepository(ref.read(apiServiceProvider));
-});
+// ── Provider ──────────────────────────────────────────────────
+ 
+final authRepositoryProvider = Provider<AuthRepository>((ref) =>
+    AuthRepository(ref.read(apiServiceProvider)));
+    

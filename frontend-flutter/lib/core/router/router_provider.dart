@@ -6,6 +6,7 @@
 //   GoRouter.refreshListenable → ChangeNotifier wrappant authProvider
 //   redirect                   → logique de garde centralisée
  
+import 'package:bx_jeunes_impact/core/router/screens/not_found_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

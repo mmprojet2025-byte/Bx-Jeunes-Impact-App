@@ -500,6 +500,29 @@ abstract class AppRouter {
     return int.parse(raw);
   }
 }
+
+class PartnerFormScreen {
+}
+
+class NotificationsScreen {
+  const NotificationsScreen();
+}
+
+class PartnerListScreen {
+  const PartnerListScreen();
+}
+
+class ActivityListScreen {
+  const ActivityListScreen();
+}
+
+class ForgotPasswordScreen {
+  const ForgotPasswordScreen();
+}
+
+class StatsScreen {
+  const StatsScreen();
+}
  
 // ── Garde de rôle (widget) ────────────────────────────────────
 //

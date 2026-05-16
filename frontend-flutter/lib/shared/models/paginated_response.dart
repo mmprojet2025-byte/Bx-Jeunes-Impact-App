@@ -91,7 +91,7 @@ class PaginatedResponse<T> {
       };
  
   /// Crée une réponse vide (utile pour les tests et les états initiaux)
-  static PaginatedResponse<T> empty<T>() => PaginatedResponse<T>(
+ static PaginatedResponse<T> createEmpty<T>() => PaginatedResponse<T>(
         content:       [],
         totalElements: 0,
         totalPages:    0,
@@ -115,4 +115,5 @@ class PaginatedResponse<T> {
         empty:         false,
       );
 }
+
  
