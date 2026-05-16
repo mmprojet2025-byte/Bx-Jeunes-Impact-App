@@ -38,7 +38,7 @@ class MyProjectsSection extends StatelessWidget {
  
   Widget _buildBody() {
     if (projects == null) {
-      return Column(children: const [CardSkeleton(), CardSkeleton()]);
+      return Column(children: [const CardSkeleton(), const CardSkeleton()]);
     }
  
     if (projects!.isEmpty) {

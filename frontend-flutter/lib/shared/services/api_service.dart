@@ -123,7 +123,7 @@ class ApiService {
         });
       }
       
-      return ApiError(statusCode: code, message: _labelFromCode(code));
+      return ApiError(status: code, message: _labelFromCode(code));
     }
 
     if (e.type == DioExceptionType.connectionTimeout ||

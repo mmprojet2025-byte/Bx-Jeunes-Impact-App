@@ -7,6 +7,7 @@
 // les activités auxquelles l'utilisateur connecté est inscrit.
  
 import 'activity.dart';
+import 'activity.dart';
  
 // ── Enum RegistrationStatus ───────────────────────────────────
  
