@@ -438,9 +438,9 @@ abstract class AppRouter {
       name: RouteNames.notifications,
       pageBuilder: (context, state) => _slidePage(
         state: state,
-        child: _RoleGuard(
-          requiredRoles: const {Role.admin, Role.superAdmin},
-          child: const NotificationsScreen(),
+        child: const _RoleGuard(
+          requiredRoles: {Role.admin, Role.superAdmin},
+          child: NotificationsScreen(),
         ),
       ),
     ),
@@ -499,6 +499,29 @@ abstract class AppRouter {
     }
     return int.parse(raw);
   }
+}
+
+class PartnerFormScreen {
+}
+
+class NotificationsScreen {
+  const NotificationsScreen();
+}
+
+class PartnerListScreen {
+  const PartnerListScreen();
+}
+
+class ActivityListScreen {
+  const ActivityListScreen();
+}
+
+class ForgotPasswordScreen {
+  const ForgotPasswordScreen();
+}
+
+class StatsScreen {
+  const StatsScreen();
 }
  
 // ── Garde de rôle (widget) ────────────────────────────────────
