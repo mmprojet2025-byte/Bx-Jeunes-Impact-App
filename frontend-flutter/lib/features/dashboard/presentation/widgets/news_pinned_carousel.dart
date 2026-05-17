@@ -158,7 +158,7 @@ class _NewsCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  DateHelpers.formatShort(news.createdAt),
+                  DateHelpers.formatShort(news.createdAt ?? DateTime.now()),
                   style: const TextStyle(
                       color: Colors.white70, fontSize: 11,),
                 ),
