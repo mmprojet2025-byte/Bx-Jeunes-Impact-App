@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
+import '../../../core/theme/app_colors.dart';
  
 /// Widget empty state générique.
 /// Affiché quand une liste est vide.

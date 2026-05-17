@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
+import '../../../core/theme/app_colors.dart';
  
 /// Boîte animée shimmer pour les skeleton loaders.
 class SkeletonBox extends StatefulWidget {

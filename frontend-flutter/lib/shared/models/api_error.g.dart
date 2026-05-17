@@ -1,3 +1,5 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'api_error.dart';
 
 // **************************************************************************
@@ -18,10 +20,10 @@ Map<String, dynamic> _$$FieldErrorImplToJson(_$FieldErrorImpl instance) =>
 
 _$ApiErrorImpl _$$ApiErrorImplFromJson(Map<String, dynamic> json) =>
     _$ApiErrorImpl(
+      status: (json['status'] as num).toInt(),
       timestamp: json['timestamp'] == null
           ? null
           : DateTime.parse(json['timestamp'] as String),
-      status: (json['status'] as num).toInt(),
       error: json['error'] as String?,
       code: json['code'] as String?,
       message: json['message'] as String? ?? 'Une erreur est survenue',
@@ -34,8 +36,8 @@ _$ApiErrorImpl _$$ApiErrorImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ApiErrorImplToJson(_$ApiErrorImpl instance) =>
     <String, dynamic>{
-      'timestamp': instance.timestamp?.toIso8601String(),
       'status': instance.status,
+      'timestamp': instance.timestamp?.toIso8601String(),
       'error': instance.error,
       'code': instance.code,
       'message': instance.message,

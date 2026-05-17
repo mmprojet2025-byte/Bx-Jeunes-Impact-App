@@ -1,3 +1,8 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
 part of 'project.dart';
 
 // **************************************************************************
@@ -18,10 +23,10 @@ mixin _$Project {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  ProjectStatus get status => throw _privateConstructorUsedError;
 
   /// Créateur du projet
   int get creatorId => throw _privateConstructorUsedError;
+  ProjectStatus get status => throw _privateConstructorUsedError;
   String? get creatorName => throw _privateConstructorUsedError;
 
   /// Groupe porteur (optionnel)
@@ -53,8 +58,8 @@ abstract class $ProjectCopyWith<$Res> {
       {int id,
       String title,
       String description,
-      ProjectStatus status,
       int creatorId,
+      ProjectStatus status,
       String? creatorName,
       int? groupId,
       String? groupName,
@@ -84,8 +89,8 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? id = null,
     Object? title = null,
     Object? description = null,
-    Object? status = null,
     Object? creatorId = null,
+    Object? status = null,
     Object? creatorName = freezed,
     Object? groupId = freezed,
     Object? groupName = freezed,
@@ -111,14 +116,14 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ProjectStatus,
       creatorId: null == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ProjectStatus,
       creatorName: freezed == creatorName
           ? _value.creatorName
           : creatorName // ignore: cast_nullable_to_non_nullable
@@ -178,8 +183,8 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       {int id,
       String title,
       String description,
-      ProjectStatus status,
       int creatorId,
+      ProjectStatus status,
       String? creatorName,
       int? groupId,
       String? groupName,
@@ -207,8 +212,8 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? description = null,
-    Object? status = null,
     Object? creatorId = null,
+    Object? status = null,
     Object? creatorName = freezed,
     Object? groupId = freezed,
     Object? groupName = freezed,
@@ -234,14 +239,14 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as ProjectStatus,
       creatorId: null == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ProjectStatus,
       creatorName: freezed == creatorName
           ? _value.creatorName
           : creatorName // ignore: cast_nullable_to_non_nullable
@@ -297,8 +302,8 @@ class _$ProjectImpl extends _Project {
       {required this.id,
       required this.title,
       required this.description,
-      this.status = ProjectStatus.pending,
       required this.creatorId,
+      this.status = ProjectStatus.pending,
       this.creatorName,
       this.groupId,
       this.groupName,
@@ -321,13 +326,13 @@ class _$ProjectImpl extends _Project {
   final String title;
   @override
   final String description;
-  @override
-  @JsonKey()
-  final ProjectStatus status;
 
   /// Créateur du projet
   @override
   final int creatorId;
+  @override
+  @JsonKey()
+  final ProjectStatus status;
   @override
   final String? creatorName;
 
@@ -358,7 +363,7 @@ class _$ProjectImpl extends _Project {
 
   @override
   String toString() {
-    return 'Project(id: $id, title: $title, description: $description, status: $status, creatorId: $creatorId, creatorName: $creatorName, groupId: $groupId, groupName: $groupName, validatedByReferentId: $validatedByReferentId, referentValidationComment: $referentValidationComment, referentValidationDate: $referentValidationDate, validatedByAdminId: $validatedByAdminId, adminValidationComment: $adminValidationComment, adminValidationDate: $adminValidationDate, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Project(id: $id, title: $title, description: $description, creatorId: $creatorId, status: $status, creatorName: $creatorName, groupId: $groupId, groupName: $groupName, validatedByReferentId: $validatedByReferentId, referentValidationComment: $referentValidationComment, referentValidationDate: $referentValidationDate, validatedByAdminId: $validatedByAdminId, adminValidationComment: $adminValidationComment, adminValidationDate: $adminValidationDate, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -370,9 +375,9 @@ class _$ProjectImpl extends _Project {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.creatorId, creatorId) ||
                 other.creatorId == creatorId) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.creatorName, creatorName) ||
                 other.creatorName == creatorName) &&
             (identical(other.groupId, groupId) || other.groupId == groupId) &&
@@ -404,8 +409,8 @@ class _$ProjectImpl extends _Project {
       id,
       title,
       description,
-      status,
       creatorId,
+      status,
       creatorName,
       groupId,
       groupName,
@@ -437,8 +442,8 @@ abstract class _Project extends Project {
       {required final int id,
       required final String title,
       required final String description,
-      final ProjectStatus status,
       required final int creatorId,
+      final ProjectStatus status,
       final String? creatorName,
       final int? groupId,
       final String? groupName,
@@ -461,11 +466,11 @@ abstract class _Project extends Project {
   @override
   String get description;
   @override
-  ProjectStatus get status;
-  @override
 
   /// Créateur du projet
   int get creatorId;
+  @override
+  ProjectStatus get status;
   @override
   String? get creatorName;
   @override

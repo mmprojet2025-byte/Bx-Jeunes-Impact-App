@@ -1,3 +1,5 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'project.dart';
 
 // **************************************************************************
@@ -9,9 +11,9 @@ _$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       description: json['description'] as String,
+      creatorId: (json['creatorId'] as num).toInt(),
       status: $enumDecodeNullable(_$ProjectStatusEnumMap, json['status']) ??
           ProjectStatus.pending,
-      creatorId: (json['creatorId'] as num).toInt(),
       creatorName: json['creatorName'] as String?,
       groupId: (json['groupId'] as num?)?.toInt(),
       groupName: json['groupName'] as String?,
@@ -38,8 +40,8 @@ Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
-      'status': _$ProjectStatusEnumMap[instance.status]!,
       'creatorId': instance.creatorId,
+      'status': _$ProjectStatusEnumMap[instance.status]!,
       'creatorName': instance.creatorName,
       'groupId': instance.groupId,
       'groupName': instance.groupName,

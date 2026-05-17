@@ -1,4 +1,9 @@
-import 'api_error.dart';
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'api_error.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -169,11 +174,11 @@ ApiError _$ApiErrorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ApiError {
-  /// Timestamp ISO-8601 de l'erreur
-  DateTime? get timestamp => throw _privateConstructorUsedError;
-
   /// Code HTTP (400, 401, 403, 404, 409, 422, 500…)
   int get status => throw _privateConstructorUsedError;
+
+  /// Timestamp ISO-8601 de l'erreur
+  DateTime? get timestamp => throw _privateConstructorUsedError;
 
   /// Libellé HTTP ("Not Found", "Unauthorized"…)
   String? get error => throw _privateConstructorUsedError;
@@ -202,8 +207,8 @@ abstract class $ApiErrorCopyWith<$Res> {
       _$ApiErrorCopyWithImpl<$Res, ApiError>;
   @useResult
   $Res call(
-      {DateTime? timestamp,
-      int status,
+      {int status,
+      DateTime? timestamp,
       String? error,
       String? code,
       String message,
@@ -224,8 +229,8 @@ class _$ApiErrorCopyWithImpl<$Res, $Val extends ApiError>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timestamp = freezed,
     Object? status = null,
+    Object? timestamp = freezed,
     Object? error = freezed,
     Object? code = freezed,
     Object? message = null,
@@ -233,14 +238,14 @@ class _$ApiErrorCopyWithImpl<$Res, $Val extends ApiError>
     Object? fieldErrors = null,
   }) {
     return _then(_value.copyWith(
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -274,8 +279,8 @@ abstract class _$$ApiErrorImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime? timestamp,
-      int status,
+      {int status,
+      DateTime? timestamp,
       String? error,
       String? code,
       String message,
@@ -294,8 +299,8 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timestamp = freezed,
     Object? status = null,
+    Object? timestamp = freezed,
     Object? error = freezed,
     Object? code = freezed,
     Object? message = null,
@@ -303,14 +308,14 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
     Object? fieldErrors = null,
   }) {
     return _then(_$ApiErrorImpl(
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -339,8 +344,8 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ApiErrorImpl extends _ApiError {
   const _$ApiErrorImpl(
-      {this.timestamp,
-      required this.status,
+      {required this.status,
+      this.timestamp,
       this.error,
       this.code,
       this.message = 'Une erreur est survenue',
@@ -352,13 +357,13 @@ class _$ApiErrorImpl extends _ApiError {
   factory _$ApiErrorImpl.fromJson(Map<String, dynamic> json) =>
       _$$ApiErrorImplFromJson(json);
 
-  /// Timestamp ISO-8601 de l'erreur
-  @override
-  final DateTime? timestamp;
-
   /// Code HTTP (400, 401, 403, 404, 409, 422, 500…)
   @override
   final int status;
+
+  /// Timestamp ISO-8601 de l'erreur
+  @override
+  final DateTime? timestamp;
 
   /// Libellé HTTP ("Not Found", "Unauthorized"…)
   @override
@@ -394,9 +399,9 @@ class _$ApiErrorImpl extends _ApiError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ApiErrorImpl &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.message, message) || other.message == message) &&
@@ -407,7 +412,7 @@ class _$ApiErrorImpl extends _ApiError {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, timestamp, status, error, code,
+  int get hashCode => Object.hash(runtimeType, status, timestamp, error, code,
       message, path, const DeepCollectionEquality().hash(_fieldErrors));
 
   @JsonKey(ignore: true)
@@ -426,8 +431,8 @@ class _$ApiErrorImpl extends _ApiError {
 
 abstract class _ApiError extends ApiError {
   const factory _ApiError(
-      {final DateTime? timestamp,
-      required final int status,
+      {required final int status,
+      final DateTime? timestamp,
       final String? error,
       final String? code,
       final String message,
@@ -440,12 +445,12 @@ abstract class _ApiError extends ApiError {
 
   @override
 
-  /// Timestamp ISO-8601 de l'erreur
-  DateTime? get timestamp;
-  @override
-
   /// Code HTTP (400, 401, 403, 404, 409, 422, 500…)
   int get status;
+  @override
+
+  /// Timestamp ISO-8601 de l'erreur
+  DateTime? get timestamp;
   @override
 
   /// Libellé HTTP ("Not Found", "Unauthorized"…)
