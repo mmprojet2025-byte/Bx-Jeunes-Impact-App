@@ -1,5 +1,5 @@
-import '../../../shared/models/user.dart';
 import '../../../shared/models/role.dart';
+import '../../../shared/models/user.dart';
  
 /// MemberSummary — version allégée d'AppUser pour les listes de membres.
 class MemberSummary {

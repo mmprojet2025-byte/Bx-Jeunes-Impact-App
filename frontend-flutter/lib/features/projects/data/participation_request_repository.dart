@@ -8,10 +8,17 @@ class ParticipationRequestRepository {
   final ApiService _api;
   ParticipationRequestRepository(this._api);
  
-  Future<List<ParticipationRequest>> fetchForProject(int projectId) =>
-    _api.get<List<dynamic>>('\${AppConfig.projectsEndpoint}/\$projectId/participation-requests',
-      fromJson: (j) => (j as List).map((e) => ParticipationRequest.fromJson(e as Map<String,dynamic>)).toList());
- 
+  Future<List<ParticipationRequest>> fetchForProject(int projectId) async {
+  final raw = await _api.get<List<dynamic>>(
+    '${AppConfig.projectsEndpoint}/$projectId/participation-requests',
+    fromJson: (j) => j as List<dynamic>,
+  );
+
+  final items = raw ?? <dynamic>[];
+  return items
+      .map((e) => ParticipationRequest.fromJson(e as Map<String, dynamic>))
+      .toList();
+}
   Future<ParticipationRequest> request(int projectId, {String? message}) =>
     _api.post<ParticipationRequest>('\${AppConfig.projectsEndpoint}/\$projectId/participation-requests',
       body: {if (message != null) 'message': message},

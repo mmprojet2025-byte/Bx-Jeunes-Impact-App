@@ -1,14 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/constants/app_config.dart';
 import '../../../shared/providers/api_service_provider.dart';
 import '../../../shared/services/api_service.dart';
-import 'activity.dart';
+import 'registration.dart';
  
 class RegistrationRepository {
   final ApiService _api;
   RegistrationRepository(this._api);
  
-  Future<List<Registration>> fetchMine() =>
+  Future<List<dynamic>> fetchMine() =>
     _api.get<List<dynamic>>('\${AppConfig.activitiesEndpoint}/my-registrations',
       fromJson: (j) => (j as List).map((e) => Registration.fromJson(e as Map<String,dynamic>)).toList());
  
@@ -19,7 +18,7 @@ class RegistrationRepository {
   Future<void> cancel(int registrationId) =>
     _api.delete('/registrations/\$registrationId');
  
-  Future<List<Registration>> fetchAttendance(int activityId) =>
+  Future<List<dynamic>> fetchAttendance(int activityId) =>
     _api.get<List<dynamic>>('\${AppConfig.activitiesEndpoint}/\$activityId/attendance',
       fromJson: (j) => (j as List).map((e) => Registration.fromJson(e as Map<String,dynamic>)).toList());
  
@@ -27,6 +26,8 @@ class RegistrationRepository {
     _api.put<Registration>('/registrations/\$registrationId/attendance',
       body: {'status': status.jsonValue},
       fromJson: (j) => Registration.fromJson(j as Map<String,dynamic>));
+
+  Future<Object?> fetchForActivity(int activityId) async {}
 }
  
 final registrationRepositoryProvider = Provider<RegistrationRepository>((ref) =>
