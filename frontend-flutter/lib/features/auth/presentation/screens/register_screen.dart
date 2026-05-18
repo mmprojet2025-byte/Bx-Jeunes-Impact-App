@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -139,11 +140,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
  
     if (success && mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.home);
+      context.goNamed(RouteNames.home);
     }
   }
  
-  void _goLogin() => Navigator.pushReplacementNamed(context, RouteNames.login);
+  void _goLogin() => context.goNamed(RouteNames.login);
  
   void _openTerms()   => Navigator.pushNamed(context, RouteNames.termsOfService);
   void _openPrivacy() => Navigator.pushNamed(context, RouteNames.privacyPolicy);

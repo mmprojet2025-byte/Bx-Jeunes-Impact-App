@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
  
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -79,15 +80,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
  
     // 4. Navigation sur succès
     if (success && mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.home);
+      context.goNamed(RouteNames.home);
     }
   }
  
   void _goForgotPassword() =>
-      Navigator.pushNamed(context, RouteNames.forgotPassword);
+      context.goNamed(RouteNames.forgotPassword);
  
   void _goRegister() =>
-      Navigator.pushNamed(context, RouteNames.register);
+      context.goNamed(RouteNames.register);
  
   // ── Build ─────────────────────────────────────────────────
  

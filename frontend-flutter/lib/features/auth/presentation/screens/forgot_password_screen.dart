@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -57,7 +58,7 @@ class _ForgotPasswordScreenState
   void _backToLogin() {
     // Réinitialise l'état du provider avant de quitter
     ref.read(forgotPasswordProvider.notifier).reset();
-    Navigator.pushReplacementNamed(context, RouteNames.login);
+    context.goNamed(RouteNames.login);
   }
  
   void _resendLink() {
