@@ -19,7 +19,7 @@ abstract class SecureStorageService {
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
     // iOS : Keychain, accessible uniquement quand l'app est déverrouillée
     iOptions: IOSOptions(
-      accessibility: KeychainAccessibility.unlocked,
+      
     ),
   );
  

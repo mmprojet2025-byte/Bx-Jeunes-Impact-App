@@ -1,14 +1,8 @@
-// Protection contre les boucles infinies :
-//   extra['_isRetry'] = true  posé sur toutes les requêtes de retry
-//   et sur la requête refresh elle-même.
-//
-// Protection contre les refreshs concurrents :
-//   _isRefreshing (mutex) + _pendingQueue (Completer list).
- 
 import 'dart:async';
  
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
  
 import '../../core/constants/app_config.dart';
 import '../../core/router/route_names.dart';
@@ -27,8 +21,6 @@ class RefreshInterceptor extends Interceptor {
     required this.navigatorKey,
   }) : _dio = dio;
  
-  // ── Point d'entrée ────────────────────────────────────────
- 
   @override
   Future<void> onError(
     DioException err,
@@ -37,13 +29,11 @@ class RefreshInterceptor extends Interceptor {
     final statusCode = err.response?.statusCode;
     final options = err.requestOptions;
  
-    // Seuls les 401 nous intéressent
     if (statusCode != 401) return handler.next(err);
  
-    // Garde-fous boucle infinie
     if (options.extra['_isRetry'] == true) {
       AppLogger.error(
-        'Retry returned 401 — aborting to prevent loop, forcing logout',
+        'Retry returned 401 — forcing logout',
         tag: 'RefreshInterceptor',
       );
       await _forceLogout();
@@ -64,12 +54,8 @@ class RefreshInterceptor extends Interceptor {
       tag: 'RefreshInterceptor',
     );
  
-    // Refresh déjà en cours → mise en file d'attente
     if (_isRefreshing) {
-      AppLogger.info(
-        'Refresh in progress, queuing: ${options.path}',
-        tag: 'RefreshInterceptor',
-      );
+      AppLogger.info('Refresh in progress, queuing: ${options.path}', tag: 'RefreshInterceptor');
       final completer = Completer<Response<dynamic>>();
       _pendingQueue.add(_PendingRequest(options: options, completer: completer));
       try {
@@ -79,7 +65,6 @@ class RefreshInterceptor extends Interceptor {
       }
     }
  
-    // Déclenchement du refresh
     _isRefreshing = true;
     try {
       final success = await _attemptRefresh();
@@ -93,12 +78,7 @@ class RefreshInterceptor extends Interceptor {
         return handler.next(err);
       }
     } catch (e, st) {
-      AppLogger.error(
-        'Unexpected error during refresh',
-        error: e,
-        stackTrace: st,
-        tag: 'RefreshInterceptor',
-      );
+      AppLogger.error('Unexpected error during refresh', error: e, stackTrace: st, tag: 'RefreshInterceptor');
       _rejectQueue();
       await _forceLogout();
       return handler.next(err);
@@ -106,8 +86,6 @@ class RefreshInterceptor extends Interceptor {
       _isRefreshing = false;
     }
   }
- 
-  // ── Refresh token ─────────────────────────────────────────
  
   Future<bool> _attemptRefresh() async {
     final refreshToken = await SecureStorageService.getRefreshToken();
@@ -121,27 +99,22 @@ class RefreshInterceptor extends Interceptor {
  
     try {
       final res = await _dio.post<Map<String, dynamic>>(
-        '${AppConfig.baseUrl}${AppConfig.refreshEndpoint}',
+        '${AppConfig.apiBaseUrl}${AppConfig.refreshEndpoint}',
         data: {'refreshToken': refreshToken},
         options: Options(
-          // _isRetry empêche AuthInterceptor ET une récursion de cet intercepteur
           extra: {'_isRetry': true},
           headers: {'Content-Type': 'application/json'},
-          // Ignore validateStatus de l'instance parente
           validateStatus: (s) => s != null && s < 500,
         ),
       );
  
       if (res.statusCode != 200 || res.data == null) {
-        AppLogger.error(
-          'Refresh failed — status ${res.statusCode}',
-          tag: 'RefreshInterceptor',
-        );
+        AppLogger.error('Refresh failed — status ${res.statusCode}', tag: 'RefreshInterceptor');
         return false;
       }
  
-      final data = res.data!;
-      final newAccess = data['accessToken'] as String?;
+      final data       = res.data!;
+      final newAccess  = data['accessToken']  as String?;
       final newRefresh = data['refreshToken'] as String?;
  
       if (newAccess == null || newAccess.isEmpty) {
@@ -150,8 +123,7 @@ class RefreshInterceptor extends Interceptor {
       }
  
       await SecureStorageService.saveTokenPair(
-        accessToken: newAccess,
-        // Certains backends ne renvoient pas de nouveau refreshToken
+        accessToken:  newAccess,
         refreshToken: newRefresh ?? refreshToken,
       );
  
@@ -166,25 +138,15 @@ class RefreshInterceptor extends Interceptor {
     }
   }
  
-  // ── Retry de la requête originale ─────────────────────────
- 
   Future<Response<dynamic>> _retryRequest(RequestOptions original) async {
     final newToken = await SecureStorageService.getAccessToken();
- 
     final retryOptions = original.copyWith(
       headers: {...original.headers, 'Authorization': 'Bearer $newToken'},
-      extra: {...original.extra, '_isRetry': true},
+      extra:   {...original.extra,   '_isRetry': true},
     );
- 
-    AppLogger.info(
-      'Retrying ${original.method} ${original.path}',
-      tag: 'RefreshInterceptor',
-    );
- 
+    AppLogger.info('Retrying ${original.method} ${original.path}', tag: 'RefreshInterceptor');
     return _dio.fetch(retryOptions);
   }
- 
-  // ── File d'attente ────────────────────────────────────────
  
   void _resolveQueue() {
     for (final req in _pendingQueue) {
@@ -201,7 +163,6 @@ class RefreshInterceptor extends Interceptor {
       req.completer.completeError(
         DioException(
           requestOptions: req.options,
-          type: DioExceptionType.unknown,
           message: 'Token refresh failed',
         ),
       );
@@ -209,20 +170,18 @@ class RefreshInterceptor extends Interceptor {
     _pendingQueue.clear();
   }
  
-  // ── Déconnexion forcée ────────────────────────────────────
- 
+  // FIX : utilise GoRouter.of(context).goNamed() via le navigatorKey
+  // au lieu de pushNamedAndRemoveUntil qui utilise le vieux système de routes
   Future<void> _forceLogout() async {
     await SecureStorageService.clearAll();
     AppLogger.info('Forced logout — navigating to /login', tag: 'RefreshInterceptor');
  
-    navigatorKey.currentState?.pushNamedAndRemoveUntil(
-      RouteNames.login,
-      (_) => false,
-    );
+    final context = navigatorKey.currentContext;
+    if (context != null && context.mounted) {
+      GoRouter.of(context).goNamed(RouteNames.login);
+    }
   }
 }
- 
-// ── Type interne ──────────────────────────────────────────────
  
 class _PendingRequest {
   final RequestOptions options;

@@ -8,8 +8,7 @@ class PrimaryButton extends StatelessWidget {
   final double height;
  
   const PrimaryButton({
-    super.key,
-    required this.label,
+    required this.label, super.key,
     this.loading = false,
     this.onTap,
     this.height = 52,
@@ -33,11 +32,11 @@ class PrimaryButton extends StatelessWidget {
             ? const SizedBox(
                 width: 22, height: 22,
                 child: CircularProgressIndicator(
-                    color: Colors.white, strokeWidth: 2.5),
+                    color: Colors.white, strokeWidth: 2.5,),
               )
             : Text(label,
                 style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold)),
+                    fontSize: 16, fontWeight: FontWeight.bold,),),
       ),
     );
   }

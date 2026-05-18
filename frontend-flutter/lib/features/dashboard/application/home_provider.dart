@@ -10,13 +10,13 @@
 //   AsyncError   → AppErrorWidget avec bouton retry
  
 import 'package:flutter_riverpod/flutter_riverpod.dart';
- 
-import '../data/dashboard_repository.dart';
-import '../data/news.dart';
+
 import '../../activities/data/activity.dart';
 import '../../activities/data/registration.dart';
 import '../../projects/data/project.dart';
- 
+import '../data/dashboard_repository.dart';
+import '../data/news.dart';
+
 // ── Re-export du value object pour simplifier les imports ─────
 export '../data/dashboard_repository.dart' show HomeData;
  

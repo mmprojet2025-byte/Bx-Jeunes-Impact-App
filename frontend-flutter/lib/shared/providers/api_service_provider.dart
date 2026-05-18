@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
- 
+
 import '../services/api_service.dart';
- 
-/// GlobalKey partagé entre MaterialApp et RefreshInterceptor.
-/// keepAlive implicite via Provider (jamais disposé).
-final navigatorKeyProvider = Provider<GlobalKey<NavigatorState>>(
-  (_) => GlobalKey<NavigatorState>(),
-);
- 
-/// Instance Dio configurée — singleton pour toute la session.
+
+/// Global navigator key used by ApiService for navigation-triggered refresh flows.
+///
+/// Attach this key to your app's [MaterialApp.router] or [MaterialApp]
+/// if you want refresh failures to be able to navigate automatically.
+final apiServiceNavigatorKey = GlobalKey<NavigatorState>();
+
 final apiServiceProvider = Provider<ApiService>((ref) {
-  return ApiService(navigatorKey: ref.read(navigatorKeyProvider));
+  return ApiService(navigatorKey: apiServiceNavigatorKey);
 });

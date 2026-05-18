@@ -14,8 +14,7 @@ class NewsPinnedCarousel extends StatefulWidget {
   final void Function(News)? onNewsTap;
  
   const NewsPinnedCarousel({
-    super.key,
-    required this.news,
+    required this.news, super.key,
     this.onNewsTap,
   });
  
@@ -138,7 +137,7 @@ class _NewsCard extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
+                      horizontal: 8, vertical: 3,),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.25),
                     borderRadius: BorderRadius.circular(20),
@@ -147,21 +146,21 @@ class _NewsCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.push_pin_outlined,
-                          color: Colors.white, size: 12),
+                          color: Colors.white, size: 12,),
                       SizedBox(width: 4),
                       Text('Épinglé',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 11,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w500,),),
                     ],
                   ),
                 ),
                 const Spacer(),
                 Text(
-                  DateHelpers.formatShort(news.createdAt),
+                  DateHelpers.formatShort(news.createdAt ?? DateTime.now()),
                   style: const TextStyle(
-                      color: Colors.white70, fontSize: 11),
+                      color: Colors.white70, fontSize: 11,),
                 ),
               ],
             ),
@@ -183,7 +182,7 @@ class _NewsCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                  color: Colors.white70, fontSize: 12),
+                  color: Colors.white70, fontSize: 12,),
             ),
           ],
         ),

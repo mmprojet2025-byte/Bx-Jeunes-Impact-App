@@ -6,9 +6,7 @@ class AppBottomNavBar extends StatelessWidget {
   final void Function(int) onTap;
  
   const AppBottomNavBar({
-    super.key,
-    required this.selectedIndex,
-    required this.onTap,
+    required this.selectedIndex, required this.onTap, super.key,
   });
  
   static const _items = [
@@ -62,4 +60,5 @@ class AppBottomNavBar extends StatelessWidget {
     );
   }
 }
+
  

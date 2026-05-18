@@ -9,11 +9,11 @@
 //   GET /api/activities?upcoming=true&limit=3
  
 import 'package:flutter_riverpod/flutter_riverpod.dart';
- 
+
 import '../../../core/constants/app_config.dart';
 import '../../../core/utils/logger.dart';
-import '../../../shared/services/api_service.dart';
 import '../../../shared/providers/api_service_provider.dart';
+import '../../../shared/services/api_service.dart';
 import '../../activities/data/activity.dart';
 import '../../activities/data/registration.dart';
 import '../../projects/data/project.dart';
