@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
@@ -30,6 +31,7 @@ public class AuthenticationService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserMapper userMapper;
 
+    @Transactional
     public AuthenticationResponse register(UserCreateRequest request) {
         // Vérification si l'email existe déjà
         if (userRepository.existsByEmail(request.email())) {
@@ -65,6 +67,7 @@ public class AuthenticationService {
         return new AuthenticationResponse(userResponse, jwtToken, refreshToken, 900L); // 900s = 15 min
     }
 
+    @Transactional
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         // 1. Spring Security s'occupe de vérifier email + mot de passe
         // S'ils sont faux, cela lance automatiquement une BadCredentialsException (401)
