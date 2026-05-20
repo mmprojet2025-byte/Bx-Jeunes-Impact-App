@@ -92,4 +92,20 @@ public class AuthenticationService {
 
         return new AuthenticationResponse(userResponse, jwtToken, refreshToken, 900L); // 900s = 15 min
     }
+    public UserResponse toUserResponse(User user) {
+        Set<String> roleNames = user.getRoles().stream()
+                .map(Enum::name)
+                .collect(java.util.stream.Collectors.toSet());
+
+        return new UserResponse(
+                user.getId(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                roleNames,
+                user.getGroup() != null ? user.getGroup().getId() : null,
+                user.getGroup() != null ? user.getGroup().getName() : null,
+                user.isActive()
+        );
+    }
 }
