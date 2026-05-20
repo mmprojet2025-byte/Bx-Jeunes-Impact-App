@@ -65,6 +65,7 @@ abstract class AppConfig {
   static const String registerEndpoint       = '/auth/register';
   static const String refreshEndpoint        = '/auth/refresh';
   static const String forgotPasswordEndpoint = '/auth/forgot-password';
+  static const String meEndpoint = '/auth/me';
  
   // ── Endpoints Features ────────────────────────────────────
  
