@@ -13,7 +13,7 @@ CREATE TABLE registrations (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     activity_id BIGINT NOT NULL REFERENCES activities(id) ON DELETE CASCADE,
-    status VARCHAR(20) DEFAULT 'REGISTERED',
+    status registration_status_enum DEFAULT 'REGISTERED',
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, activity_id)
 );
