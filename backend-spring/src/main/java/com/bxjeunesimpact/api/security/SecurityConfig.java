@@ -42,7 +42,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Endpoints publics
                 .requestMatchers(
-                        "/api/auth/**",
+                        "/api/auth/login",
+                        "/api/auth/register",
+                        "/api/auth/refresh",
+                        "/api/auth/forgot-password",
                         "/v2/api-docs",
                         "/v3/api-docs",
                         "/v3/api-docs/**",
