@@ -35,7 +35,7 @@ abstract class AppConfig {
  
   static const String _rawBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://10.0.2.2:8080', // Android emulator → localhost host machine
+    defaultValue: 'http://10.0.2.2:8081', // Android emulator → localhost host machine
                                             // iOS simulator    → utilise http://localhost:8080
   );
   static String get baseUrl => const String.fromEnvironment(

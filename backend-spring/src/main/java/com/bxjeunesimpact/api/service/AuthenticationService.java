@@ -95,6 +95,7 @@ public class AuthenticationService {
 
         return new AuthenticationResponse(userResponse, jwtToken, refreshToken, 900L); // 900s = 15 min
     }
+    @Transactional(readOnly = true)
     public UserResponse toUserResponse(User user) {
         Set<String> roleNames = user.getRoles().stream()
                 .map(Enum::name)
@@ -110,5 +111,11 @@ public class AuthenticationService {
                 user.getGroup() != null ? user.getGroup().getName() : null,
                 user.isActive()
         );
+    }
+    @Transactional(readOnly = true)
+    public UserResponse getCurrentUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+        return toUserResponse(user);
     }
 }

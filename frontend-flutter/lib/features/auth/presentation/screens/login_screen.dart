@@ -8,6 +8,7 @@ import '../../../../shared/widgets/bx_logo.dart';
 import '../../../../shared/widgets/buttons/primary_button.dart';
 import '../../../../shared/widgets/forms/custom_text_field.dart';
 import '../../application/login_provider.dart';
+import 'package:go_router/go_router.dart';
  
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -77,17 +78,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       password: _passCtrl.text,
     );
  
-    // 4. Navigation sur succès
-    if (success && mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.home);
-    }
+    
   }
  
-  void _goForgotPassword() =>
-      Navigator.pushNamed(context, RouteNames.forgotPassword);
- 
-  void _goRegister() =>
-      Navigator.pushNamed(context, RouteNames.register);
+  void _goForgotPassword() => context.pushNamed(RouteNames.forgotPassword);
+
+  void _goRegister() => context.pushNamed(RouteNames.register);
  
   // ── Build ─────────────────────────────────────────────────
  
