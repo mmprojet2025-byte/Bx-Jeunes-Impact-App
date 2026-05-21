@@ -154,7 +154,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
             label:       'Email',
             hint:        'exemple@email.com',
             prefixIcon:  Icons.email_outlined,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             onFieldSubmitted: () {
               // Focus passe au mot de passe
