@@ -7,6 +7,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/widgets/buttons/primary_button.dart';
 import '../../../../shared/widgets/forms/custom_text_field.dart';
 import '../../application/forgot_password_provider.dart';
+import 'package:go_router/go_router.dart';
  
 // ─────────────────────────────────────────────────────────────
 //  Screen
@@ -57,7 +58,7 @@ class _ForgotPasswordScreenState
   void _backToLogin() {
     // Réinitialise l'état du provider avant de quitter
     ref.read(forgotPasswordProvider.notifier).reset();
-    Navigator.pushReplacementNamed(context, RouteNames.login);
+    context.goNamed(RouteNames.login);
   }
  
   void _resendLink() {
