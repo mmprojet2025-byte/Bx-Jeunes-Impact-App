@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "GenerateHash",
+      "request": "launch",
+      "mainClass": "com.bxjeunesimpact.api.GenerateHash",
+      "projectName": "api"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-ApiApplication<api>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

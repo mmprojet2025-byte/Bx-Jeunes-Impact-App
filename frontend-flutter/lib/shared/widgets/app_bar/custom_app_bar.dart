@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
  
 import '../../../core/theme/app_colors.dart';
 import 'env_badge.dart';
+import 'package:go_router/go_router.dart';
  
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -34,7 +35,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: showBack
           ? GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.goNamed('home');
+                }
+              },
               child: Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(

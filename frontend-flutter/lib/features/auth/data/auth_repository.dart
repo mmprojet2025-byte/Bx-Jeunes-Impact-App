@@ -47,7 +47,7 @@ class AuthRepository {
  
   Future<AppUser> getMe() =>
       _api.get<AppUser>(
-        '${AppConfig.usersEndpoint}/me',
+        AppConfig.meEndpoint,
         fromJson: (json) =>
             AppUser.fromJson(json as Map<String, dynamic>),
       );
