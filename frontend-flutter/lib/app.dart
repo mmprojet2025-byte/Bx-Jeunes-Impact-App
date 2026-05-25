@@ -1,42 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
- 
+
 import 'core/router/router_provider.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
 import 'shared/providers/auth_provider.dart';
- 
+
+
+const _localizationsDelegates = [
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+];
+
+const _supportedLocales = [
+  Locale('fr', 'FR'),
+  Locale('en', 'US'),
+  Locale('nl', 'NL'),
+];
+
 class BxJeunesApp extends ConsumerWidget {
   const BxJeunesApp({super.key});
- 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
- 
-    // Show splash while authProvider checks stored token on startup
+
     if (authState.isInitial || authState.isLoading) {
-      return MaterialApp(
+      return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        home: const _SplashScreen(),
+        localizationsDelegates: _localizationsDelegates, 
+        supportedLocales: _supportedLocales,             
+        home: _SplashScreen(),
       );
     }
- 
-    // GoRouter requires MaterialApp.router — never MaterialApp.
-    // navigatorKey, initialRoute and onGenerateRoute are NOT compatible
-    // with MaterialApp.router; GoRouter handles all of that internally.
+
     return MaterialApp.router(
       title:                    'Bx-Jeunes Impact',
       debugShowCheckedModeBanner: false,
       theme:                    AppTheme.light,
       routerConfig:             ref.watch(routerProvider),
+      localizationsDelegates:   _localizationsDelegates,
+      supportedLocales:         _supportedLocales,
     );
   }
 }
- 
+
 class _SplashScreen extends StatelessWidget {
   const _SplashScreen();
- 
+
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.background,

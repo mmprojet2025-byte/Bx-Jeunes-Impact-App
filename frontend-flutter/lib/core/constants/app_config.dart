@@ -1,6 +1,6 @@
 // Configuration centralisée de l'application.
 // Les valeurs sensibles à l'environnement sont injectées au BUILD
-// via --dart-define, jamais codées en dur.
+// via --dart-define.
 //
 // ── Utilisation ──────────────────────────────────────────────
 //
@@ -34,10 +34,9 @@ abstract class AppConfig {
   // fonctionnent directement avec Dio baseUrl.
  
   static const String _rawBaseUrl = String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: 'http://10.0.2.2:8081', // Android emulator → localhost host machine
-                                            // iOS simulator    → utilise http://localhost:8080
-  );
+  'API_BASE_URL',
+  defaultValue: 'http://localhost:8081',
+);
   static String get baseUrl => const String.fromEnvironment(
         'API_BASE_URL',
         defaultValue: 'https://api.example.com',
