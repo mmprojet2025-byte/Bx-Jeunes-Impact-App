@@ -106,10 +106,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final init = _dateOfBirth ?? DateTime(now.year - 18, now.month, now.day);
 
     final picked = await showDatePicker(
-      context:     context,
-      initialDate: init,
-      firstDate:   DateTime(1950),
-      lastDate:    now,
+          context: context,
+          initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+          firstDate: DateTime(1950),
+          lastDate: DateTime.now(),
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
           colorScheme: Theme.of(context).colorScheme.copyWith(
