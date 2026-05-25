@@ -35,7 +35,7 @@ abstract class AppConfig {
  
   static const String _rawBaseUrl = String.fromEnvironment(
   'API_BASE_URL',
-  defaultValue: 'http://localhost:8081',
+  defaultValue: 'http://10.0.2.2:8081',
 );
   static String get baseUrl => const String.fromEnvironment(
         'API_BASE_URL',
