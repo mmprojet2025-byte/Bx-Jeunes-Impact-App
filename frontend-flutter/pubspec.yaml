@@ -47,10 +47,9 @@ dependencies:
   fl_chart: ^0.68.0
 
   # ── Misc ──────────────────────────────────────────────────
-  equatable: ^2.0.5
-  collection: ^1.18.0
   google_fonts: ^8.1.0
   equatable: ^2.0.5
+  collection: ^1.18.0
 
 # ─────────────────────────────────────────────────────────────
 #  DEV DEPENDENCIES
@@ -75,8 +74,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  # Active la génération des fichiers de localisation (flutter gen-l10n)
   generate: true
 
   assets:
@@ -84,11 +81,11 @@ flutter:
     - assets/icons/
     - assets/fonts/
 
- fonts:
+  fonts:
     - family: Poppins
-       fonts:
-         - asset: assets/fonts/Poppins-Regular.ttf
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
         - asset: assets/fonts/Poppins-SemiBold.ttf
           weight: 600
-       - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700

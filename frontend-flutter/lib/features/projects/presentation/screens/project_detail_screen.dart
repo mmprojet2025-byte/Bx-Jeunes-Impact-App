@@ -57,7 +57,7 @@ class ProjectDetailScreen extends ConsumerWidget {
 
 class _ProjectBody extends ConsumerWidget {
   final Project project;
-  final int projectId;
+  final int projectId;   // explicit int type
   const _ProjectBody({required this.project, required this.projectId});
 
   @override
@@ -151,9 +151,9 @@ class _ProjectBody extends ConsumerWidget {
 
   Future<void> _validate(BuildContext context, WidgetRef ref, ProjectStatus s) async {
     final ok = await ref.read(projectValidationProvider.notifier)
-        .validate(projectId, s.jsonValue);
+      .validate(projectId as int, s.jsonValue);
     if (ok && context.mounted) {
-      ref.refresh(projectDetailProvider(projectId));
+      ref.refresh(projectDetailProvider(projectId as int));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: const Text('Statut mis à jour'),
         backgroundColor: AppColors.success, behavior: SnackBarBehavior.floating,
@@ -386,17 +386,52 @@ class _ActionButtons extends StatelessWidget {
 
 class _DetailSkeleton extends StatelessWidget {
   const _DetailSkeleton();
+
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    padding: const EdgeInsets.all(20),
-    child: Column(children: [
-      SkeletonLoader(child: Container(height: 44, decoration: BoxDecoration(color: AppColors.shimmerBase, borderRadius: BorderRadius.circular(12)))),
-      const SizedBox(height: 16),
-      SkeletonLoader(child: Container(height: 24, width: 200, color: AppColors.shimmerBase)),
-      const SizedBox(height: 12),
-      SkeletonLoader(child: Container(height: 120, decoration: BoxDecoration(color: AppColors.shimmerBase, borderRadius: BorderRadius.circular(12)))),
-      const SizedBox(height: 16),
-      SkeletonLoader(child: Container(height: 200, decoration: BoxDecoration(color: AppColors.shimmerBase, borderRadius: BorderRadius.circular(12)))),
-    ]),
-  );
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          SkeletonLoader(
+            child: Container(
+              height: 44,
+              decoration: BoxDecoration(
+                color: AppColors.shimmerBase,
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SkeletonLoader(
+            child: Container(
+              height: 24,
+              width: 200,
+              color: AppColors.shimmerBase,
+            ),
+          ),
+          const SizedBox(height: 12),
+          SkeletonLoader(
+            child: Container(
+              height: 120,
+              decoration: BoxDecoration(
+                color: AppColors.shimmerBase,
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SkeletonLoader(
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: AppColors.shimmerBase,
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
