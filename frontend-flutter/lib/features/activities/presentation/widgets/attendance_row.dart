@@ -9,7 +9,7 @@ class AttendanceRow extends StatelessWidget {
   const AttendanceRow(
       {required this.registration,
       required this.onStatusChanged,
-      super.key});
+      super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class AttendanceRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: const BoxDecoration(
         border: Border(
-            bottom: BorderSide(color: AppColors.border, width: 0.5)),
+            bottom: BorderSide(color: AppColors.border, width: 0.5),),
       ),
       child: Row(children: [
         // ── Avatar initiales ─────────────────────────────
@@ -29,14 +29,14 @@ class AttendanceRow extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
-                color: AppColors.primary),
+                color: AppColors.primary,),
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: Text('Utilisateur #${registration.userId}',
               style: const TextStyle(
-                  fontSize: 14, color: AppColors.textPrimary)),
+                  fontSize: 14, color: AppColors.textPrimary,),),
         ),
         // ── Boutons présence ──────────────────────────────
         _StatusButton(
@@ -52,7 +52,7 @@ class AttendanceRow extends StatelessWidget {
           selected: registration.status == RegistrationStatus.noShow,
           onTap: () => onStatusChanged(RegistrationStatus.noShow),
         ),
-      ]),
+      ],),
     );
   }
 }
@@ -66,7 +66,7 @@ class _StatusButton extends StatelessWidget {
       {required this.icon,
       required this.color,
       required this.selected,
-      required this.onTap});
+      required this.onTap,});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -80,7 +80,7 @@ class _StatusButton extends StatelessWidget {
             border: selected ? Border.all(color: color, width: 1.5) : null,
           ),
           child: Icon(icon,
-              size: 20, color: selected ? color : AppColors.textSecondary),
+              size: 20, color: selected ? color : AppColors.textSecondary,),
         ),
       );
 }

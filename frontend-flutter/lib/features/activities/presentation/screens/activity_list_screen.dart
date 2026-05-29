@@ -7,7 +7,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../shared/widgets/app_bar/custom_app_bar.dart';
 import '../../../../shared/widgets/error_states/error_widget.dart';
-import '../../../../shared/widgets/loaders/skeleton_loader.dart';
 import '../../application/activity_list_provider.dart';
 import '../../data/activity.dart';
 import '../widgets/activity_card.dart';
@@ -52,7 +51,7 @@ class _ActivityListScreenState extends ConsumerState<ActivityListScreen> {
         .where((a) =>
             a.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
             (a.description?.toLowerCase().contains(_searchQuery.toLowerCase()) ??
-                false))
+                false),)
         .toList();
   }
 
@@ -87,11 +86,11 @@ class _ActivityListScreenState extends ConsumerState<ActivityListScreen> {
                 decoration: InputDecoration(
                   hintText: 'Rechercher une activité...',
                   prefixIcon: const Icon(Icons.search_outlined,
-                      color: AppColors.textHint, size: 20),
+                      color: AppColors.textHint, size: 20,),
                   suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
                           icon: const Icon(Icons.close,
-                              color: AppColors.textHint, size: 18),
+                              color: AppColors.textHint, size: 18,),
                           onPressed: () {
                             _searchController.clear();
                             setState(() => _searchQuery = '');
@@ -101,7 +100,7 @@ class _ActivityListScreenState extends ConsumerState<ActivityListScreen> {
                   filled: true,
                   fillColor: AppColors.white,
                   contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 12),
+                      horizontal: 16, vertical: 12,),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(color: AppColors.border),
@@ -171,7 +170,7 @@ class _ActivityListScreenState extends ConsumerState<ActivityListScreen> {
                                     child: Center(
                                       child: CircularProgressIndicator(
                                           color: AppColors.red,
-                                          strokeWidth: 2),
+                                          strokeWidth: 2,),
                                     ),
                                   );
                                 }
@@ -180,7 +179,7 @@ class _ActivityListScreenState extends ConsumerState<ActivityListScreen> {
                                   onTap: () => context.goNamed(
                                     RouteNames.activityDetail,
                                     pathParameters: {
-                                      'id': filtered[i].id.toString()
+                                      'id': filtered[i].id.toString(),
                                     },
                                   ),
                                 );
@@ -233,12 +232,12 @@ class _EmptyState extends StatelessWidget {
             Container(
               width: 80,
               height: 80,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.primaryLight,
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.event_busy_outlined,
-                  color: AppColors.primary, size: 36),
+                  color: AppColors.primary, size: 36,),
             ),
             const SizedBox(height: 20),
             Text(

@@ -48,7 +48,7 @@ class Partner {
         websiteUrl: j['websiteUrl'] as String?,
         level: PartnerLevel.values.firstWhere(
             (l) => l.name.toUpperCase() == (j['level'] as String).toUpperCase(),
-            orElse: () => PartnerLevel.bronze),
+            orElse: () => PartnerLevel.bronze,),
         active: j['active'] as bool? ?? true,
       );
 
@@ -67,24 +67,24 @@ class PartnerRepository {
   PartnerRepository(this._api);
 
   Future<List<Partner>> fetchAll() =>
-      _api.get<List<dynamic>>(AppConfig.partnersEndpoint,
+      _api.get<List<Partner>>(AppConfig.partnersEndpoint,
           fromJson: (j) => (j as List)
               .map((e) => Partner.fromJson(e as Map<String, dynamic>))
-              .toList());
+              .toList(),);
 
   Future<Partner> create(Map<String, dynamic> data) =>
       _api.post<Partner>(AppConfig.partnersEndpoint,
           body: data,
-          fromJson: (j) => Partner.fromJson(j as Map<String, dynamic>));
+          fromJson: (j) => Partner.fromJson(j as Map<String, dynamic>),);
 
   Future<Partner> update(int id, Map<String, dynamic> data) =>
       _api.put<Partner>('${AppConfig.partnersEndpoint}/$id',
           body: data,
-          fromJson: (j) => Partner.fromJson(j as Map<String, dynamic>));
+          fromJson: (j) => Partner.fromJson(j as Map<String, dynamic>),);
 
   Future<void> delete(int id) =>
       _api.delete('${AppConfig.partnersEndpoint}/$id');
 }
 
 final partnerRepositoryProvider = Provider<PartnerRepository>(
-    (ref) => PartnerRepository(ref.read(apiServiceProvider)));
+    (ref) => PartnerRepository(ref.read(apiServiceProvider)),);

@@ -56,5 +56,5 @@ class AuthRepository {
 // ── Provider ──────────────────────────────────────────────────
  
 final authRepositoryProvider = Provider<AuthRepository>((ref) =>
-    AuthRepository(ref.read(apiServiceProvider)));
+    AuthRepository(ref.read(apiServiceProvider)),);
     

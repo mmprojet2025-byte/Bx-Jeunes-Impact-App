@@ -7,7 +7,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../shared/widgets/app_bar/custom_app_bar.dart';
 import '../../../../shared/widgets/error_states/error_widget.dart';
-import '../../../../shared/widgets/loaders/skeleton_loader.dart';
 import '../../application/project_list_provider.dart';
 import '../../data/project.dart';
 

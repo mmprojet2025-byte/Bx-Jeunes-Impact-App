@@ -57,11 +57,11 @@ class Registration {
         id:               json['id'] as int,
         userId:           json['userId'] as int,
         activity:         Activity.fromJson(
-            json['activity'] as Map<String, dynamic>),
+            json['activity'] as Map<String, dynamic>,),
         registrationDate: DateTime.parse(
-            json['registrationDate'] as String),
+            json['registrationDate'] as String,),
         status: RegistrationStatus.fromString(
-            json['status'] as String),
+            json['status'] as String,),
       );
 
   Map<String, dynamic> toJson() => {

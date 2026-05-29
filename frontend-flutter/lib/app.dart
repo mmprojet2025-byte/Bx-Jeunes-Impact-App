@@ -101,7 +101,7 @@ class _SplashScreen extends StatelessWidget {
           width: 28, height: 28,
           child: CircularProgressIndicator(color: AppColors.red, strokeWidth: 2.5),
         ),
-      ]),
+      ],),
     ),
   );
 }

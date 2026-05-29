@@ -128,7 +128,7 @@ class AppTheme {
 
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.selected) ? AppColors.primary : Colors.transparent),
+            s.contains(WidgetState.selected) ? AppColors.primary : Colors.transparent,),
         checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         side: const BorderSide(color: AppColors.border, width: 1.5),
@@ -136,13 +136,13 @@ class AppTheme {
 
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.selected) ? AppColors.surface : AppColors.textSecondary),
+            s.contains(WidgetState.selected) ? AppColors.surface : AppColors.textSecondary,),
         trackColor: WidgetStateProperty.resolveWith((s) =>
-            s.contains(WidgetState.selected) ? AppColors.primary : AppColors.border),
+            s.contains(WidgetState.selected) ? AppColors.primary : AppColors.border,),
       ),
 
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppColors.primary, linearTrackColor: AppColors.border),
+        color: AppColors.primary, linearTrackColor: AppColors.border,),
     );
   }
 }

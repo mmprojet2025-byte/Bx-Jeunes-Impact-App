@@ -9,7 +9,7 @@ class PartnerCard extends StatelessWidget {
   final VoidCallback? onDelete;
 
   const PartnerCard(
-      {required this.partner, super.key, this.onEdit, this.onDelete});
+      {required this.partner, super.key, this.onEdit, this.onDelete,});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class PartnerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: const [
           BoxShadow(
-              color: Color(0x0A000000), blurRadius: 8, offset: Offset(0, 2))
+              color: Color(0x0A000000), blurRadius: 8, offset: Offset(0, 2),),
         ],
       ),
       child: Row(children: [
@@ -33,7 +33,7 @@ class PartnerCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(Icons.business_outlined,
-              color: AppColors.textSecondary, size: 24),
+              color: AppColors.textSecondary, size: 24,),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -42,22 +42,22 @@ class PartnerCard extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary)),
+                    color: AppColors.textPrimary,),),
             const SizedBox(height: 4),
             PartnerLevelBadge(level: partner.level),
-          ]),
+          ],),
         ),
         if (onEdit != null)
           IconButton(
               onPressed: onEdit,
               icon: const Icon(Icons.edit_outlined,
-                  size: 18, color: AppColors.textSecondary)),
+                  size: 18, color: AppColors.textSecondary,),),
         if (onDelete != null)
           IconButton(
               onPressed: onDelete,
               icon: const Icon(Icons.delete_outline,
-                  size: 18, color: AppColors.refuse)),
-      ]),
+                  size: 18, color: AppColors.refuse,),),
+      ],),
     );
   }
 }

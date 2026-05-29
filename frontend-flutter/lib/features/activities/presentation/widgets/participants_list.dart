@@ -17,16 +17,16 @@ class ParticipantsList extends ConsumerWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const Text('Participants',
+      child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Participants',
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary)),
-        const SizedBox(height: 12),
-        const CardSkeleton(),
-        const CardSkeleton(),
-      ]),
+                color: AppColors.textPrimary,),),
+        SizedBox(height: 12),
+        CardSkeleton(),
+        CardSkeleton(),
+      ],),
     );
   }
 }

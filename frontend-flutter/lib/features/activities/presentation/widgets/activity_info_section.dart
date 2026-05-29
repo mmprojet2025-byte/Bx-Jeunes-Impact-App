@@ -20,7 +20,7 @@ class ActivityInfoSection extends StatelessWidget {
           BoxShadow(
               color: Color(0x0A000000),
               blurRadius: 8,
-              offset: Offset(0, 2))
+              offset: Offset(0, 2),),
         ],
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -30,34 +30,34 @@ class ActivityInfoSection extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary)),
+                color: AppColors.textPrimary,),),
         if (activity.description != null) ...[
           const SizedBox(height: 8),
           Text(activity.description!,
               style: const TextStyle(
                   fontSize: 14,
                   color: AppColors.textSecondary,
-                  height: 1.5)),
+                  height: 1.5,),),
         ],
         const SizedBox(height: 16),
         const Divider(color: AppColors.border, height: 1),
         const SizedBox(height: 16),
         _InfoRow(
             icon: Icons.calendar_today_outlined,
-            text: DateHelpers.formatDateTime(activity.date)),
+            text: DateHelpers.formatDateTime(activity.date),),
         if (activity.groupName != null) ...[
           const SizedBox(height: 10),
           _InfoRow(
-              icon: Icons.groups_outlined, text: activity.groupName!),
+              icon: Icons.groups_outlined, text: activity.groupName!,),
         ],
         if (activity.maxParticipants != null) ...[
           const SizedBox(height: 10),
           _InfoRow(
               icon: Icons.people_outline,
               text:
-                  '${activity.currentParticipants ?? 0} / ${activity.maxParticipants} participants'),
+                  '${activity.currentParticipants ?? 0} / ${activity.maxParticipants} participants',),
         ],
-      ]),
+      ],),
     );
   }
 }
@@ -74,6 +74,6 @@ class _InfoRow extends StatelessWidget {
         Expanded(
             child: Text(text,
                 style: const TextStyle(
-                    fontSize: 14, color: AppColors.textPrimary))),
-      ]);
+                    fontSize: 14, color: AppColors.textPrimary,),),),
+      ],);
 }

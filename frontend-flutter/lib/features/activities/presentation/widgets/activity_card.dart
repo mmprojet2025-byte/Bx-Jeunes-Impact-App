@@ -10,7 +10,7 @@ class ActivityCard extends StatelessWidget {
   final bool compact;
 
   const ActivityCard(
-      {required this.activity, super.key, this.onTap, this.compact = false});
+      {required this.activity, super.key, this.onTap, this.compact = false,});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ActivityCard extends StatelessWidget {
             BoxShadow(
                 color: Color(0x0A000000),
                 blurRadius: 8,
-                offset: Offset(0, 2))
+                offset: Offset(0, 2),),
           ],
         ),
         child: Row(children: [
@@ -45,12 +45,12 @@ class ActivityCard extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: activity.category.color)),
+                        color: activity.category.color,),),
                 Text(activity.monthAbbr,
                     style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
-                        color: activity.category.color)),
+                        color: activity.category.color,),),
               ],
             ),
           ),
@@ -66,19 +66,19 @@ class ActivityCard extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary)),
+                        color: AppColors.textPrimary,),),
                 const SizedBox(height: 4),
                 Text(DateHelpers.formatDateTime(activity.date),
                     style: const TextStyle(
-                        fontSize: 12, color: AppColors.textSecondary)),
+                        fontSize: 12, color: AppColors.textSecondary,),),
                 const SizedBox(height: 6),
                 CategoryChip(category: activity.category, compact: true),
               ],
             ),
           ),
           const Icon(Icons.chevron_right,
-              size: 18, color: AppColors.textSecondary),
-        ]),
+              size: 18, color: AppColors.textSecondary,),
+        ],),
       ),
     );
   }

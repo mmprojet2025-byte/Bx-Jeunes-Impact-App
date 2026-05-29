@@ -103,4 +103,4 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
  
 final registerProvider =
     StateNotifierProvider<RegisterNotifier, RegisterState>((ref) =>
-        RegisterNotifier(ref.read(authRepositoryProvider), ref));
+        RegisterNotifier(ref.read(authRepositoryProvider), ref),);

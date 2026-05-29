@@ -7,12 +7,12 @@ class PartnerFormScreen extends StatelessWidget {
   const PartnerFormScreen({super.key, this.partnerId});
  
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => const Scaffold(
     backgroundColor: AppColors.background,
     appBar: CustomAppBar(title: 'Partenaire'),
-    body: const Center(
+    body: Center(
       child: Text('À implémenter',
-          style: TextStyle(color: AppColors.textSecondary)),
+          style: TextStyle(color: AppColors.textSecondary),),
     ),
   );
 }

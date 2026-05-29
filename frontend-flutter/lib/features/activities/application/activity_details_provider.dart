@@ -19,7 +19,7 @@ class ActivityDetailsNotifier extends FamilyAsyncNotifier<Activity, int> {
   Future<void> refresh() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(
-        () => ref.read(activityRepositoryProvider).fetchById(arg));
+        () => ref.read(activityRepositoryProvider).fetchById(arg),);
   }
 }
 
@@ -43,7 +43,7 @@ class ActivityRegistrationNotifier
           .where((r) =>
               r.activity.id == activityId && r.status.isActive)
           .firstOrNull;
-      state = AsyncData(reg);
+      state = AsyncData(reg as Registration);
     } catch (e, st) {
       state = AsyncError(e, st);
     }
@@ -68,5 +68,5 @@ class ActivityRegistrationNotifier
 final activityRegistrationProvider = StateNotifierProvider.family<
     ActivityRegistrationNotifier, AsyncValue<Registration?>, int>(
   (ref, activityId) => ActivityRegistrationNotifier(
-      ref.read(registrationRepositoryProvider), activityId),
+      ref.read(registrationRepositoryProvider), activityId,),
 );

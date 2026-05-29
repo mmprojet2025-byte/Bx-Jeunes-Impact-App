@@ -46,21 +46,21 @@ abstract class AppRouter {
 
     // ── Auth ──────────────────────────────────────────────
     GoRoute(path: RoutePaths.login, name: RouteNames.login,
-        pageBuilder: (_, s) => _fadePage(state: s, child: const LoginScreen())),
+        pageBuilder: (_, s) => _fadePage(state: s, child: const LoginScreen()),),
     GoRoute(path: RoutePaths.register, name: RouteNames.register,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const RegisterScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const RegisterScreen()),),
     GoRoute(path: RoutePaths.forgotPassword, name: RouteNames.forgotPassword,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const ForgotPasswordScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const ForgotPasswordScreen()),),
 
     // ── Main ──────────────────────────────────────────────
     GoRoute(path: RoutePaths.home, name: RouteNames.home,
-        pageBuilder: (_, s) => _fadePage(state: s, child: const HomeScreen())),
+        pageBuilder: (_, s) => _fadePage(state: s, child: const HomeScreen()),),
     GoRoute(path: RoutePaths.stats, name: RouteNames.stats,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const StatsScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const StatsScreen()),),
     GoRoute(
       path: RoutePaths.adminDashboard, name: RouteNames.adminDashboard,
-      pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-        requiredRoles: const {Role.admin, Role.superAdmin}, child: const AdminDashboardScreen())),
+      pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+        requiredRoles: {Role.admin, Role.superAdmin}, child: AdminDashboardScreen(),),),
     ),
 
     // ── News ──────────────────────────────────────────────
@@ -70,80 +70,80 @@ abstract class AppRouter {
       routes: [
         GoRoute(path: ':id', name: RouteNames.newsDetail,
             pageBuilder: (_, s) => _slidePage(state: s,
-                child: NewsDetailsScreen(newsId: _parseId(s, 'id')))),
+                child: NewsDetailsScreen(newsId: _parseId(s, 'id')),),),
       ],
     ),
 
     // ── Activities ────────────────────────────────────────
     GoRoute(path: RoutePaths.activities, name: RouteNames.activities,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const ActivityListScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const ActivityListScreen()),),
     GoRoute(path: RoutePaths.activityNew, name: RouteNames.activityNew,
-        pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-            requiredRoles: const {Role.admin, Role.groupReferent}, child: const ActivityFormScreen()))),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+            requiredRoles: {Role.admin, Role.groupReferent}, child: ActivityFormScreen(),),),),
     GoRoute(
       path: '/activities/:id', name: RouteNames.activityDetail,
       pageBuilder: (_, s) => _slidePage(state: s,
-          child: ActivityDetailScreen(activityId: _parseId(s, 'id'))),
+          child: ActivityDetailScreen(activityId: _parseId(s, 'id')),),
       routes: [
         GoRoute(path: 'edit', name: RouteNames.activityEdit,
             pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
                 requiredRoles: const {Role.admin, Role.groupReferent},
-                child: ActivityFormScreen(activityId: _parseId(s, 'id'))))),
+                child: ActivityFormScreen(activityId: _parseId(s, 'id')),),),),
         GoRoute(path: 'attendance', name: RouteNames.activityAttendance,
             pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
                 requiredRoles: const {Role.admin, Role.groupReferent},
-                child: AttendanceScreen(activityId: _parseId(s, 'id'))))),
+                child: AttendanceScreen(activityId: _parseId(s, 'id')),),),),
       ],
     ),
 
     // ── Projects ──────────────────────────────────────────
     GoRoute(path: RoutePaths.projects, name: RouteNames.projects,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const ProjectListScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const ProjectListScreen()),),
     GoRoute(path: RoutePaths.projectNew, name: RouteNames.projectNew,
-        pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-            requiredRoles: const {Role.youth, Role.groupReferent, Role.projectManager},
-            child: const ProjectFormScreen()))),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+            requiredRoles: {Role.youth, Role.groupReferent, Role.projectManager},
+            child: ProjectFormScreen(),),),),
     GoRoute(
       path: '/projects/:id', name: RouteNames.projectDetail,
       pageBuilder: (_, s) => _slidePage(state: s,
-          child: ProjectDetailScreen(projectId: _parseId(s, 'id'))),
+          child: ProjectDetailScreen(projectId: _parseId(s, 'id')),),
       routes: [
         GoRoute(path: 'edit', name: RouteNames.projectEdit,
             pageBuilder: (_, s) => _slidePage(state: s,
-                child: ProjectFormScreen(projectId: _parseId(s, 'id')))),
+                child: ProjectFormScreen(projectId: _parseId(s, 'id')),),),
         GoRoute(path: 'members', name: RouteNames.projectMembers,
             pageBuilder: (_, s) => _slidePage(state: s,
-                child: ProjectMembersScreen(projectId: _parseId(s, 'id')))),
+                child: ProjectMembersScreen(projectId: _parseId(s, 'id')),),),
       ],
     ),
 
     // ── Groups ────────────────────────────────────────────
     GoRoute(path: RoutePaths.groups, name: RouteNames.groups,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const GroupListScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const GroupListScreen()),),
     GoRoute(path: RoutePaths.groupNew, name: RouteNames.groupNew,
-        pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-            requiredRoles: const {Role.admin, Role.superAdmin}, child: const GroupFormScreen()))),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+            requiredRoles: {Role.admin, Role.superAdmin}, child: GroupFormScreen(),),),),
     GoRoute(
       path: '/groups/:id', name: RouteNames.groupDetail,
       pageBuilder: (_, s) => _slidePage(state: s,
-          child: GroupDetailScreen(groupId: _parseId(s, 'id'))),
+          child: GroupDetailScreen(groupId: _parseId(s, 'id')),),
       routes: [
         GoRoute(path: 'edit', name: RouteNames.groupEdit,
             pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
                 requiredRoles: const {Role.admin, Role.superAdmin, Role.groupReferent},
-                child: GroupFormScreen(groupId: _parseId(s, 'id'))))),
+                child: GroupFormScreen(groupId: _parseId(s, 'id')),),),),
         GoRoute(path: 'members', name: RouteNames.groupMembers,
             pageBuilder: (_, s) => _slidePage(state: s,
-                child: GroupMembersScreen(groupId: _parseId(s, 'id')))),
+                child: GroupMembersScreen(groupId: _parseId(s, 'id')),),),
       ],
     ),
 
     // ── Members ───────────────────────────────────────────
     GoRoute(path: RoutePaths.memberList, name: RouteNames.memberList,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const MemberListScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const MemberListScreen()),),
     GoRoute(path: '/members/:id', name: RouteNames.memberDetail,
         pageBuilder: (_, s) => _slidePage(state: s,
-            child: MemberDetailScreen(memberId: _parseId(s, 'id')))),
+            child: MemberDetailScreen(memberId: _parseId(s, 'id')),),),
 
     // ── Profile ───────────────────────────────────────────
     GoRoute(
@@ -151,56 +151,54 @@ abstract class AppRouter {
       pageBuilder: (_, s) => _slidePage(state: s, child: const ProfileScreen()),
       routes: [
         GoRoute(path: 'edit', name: RouteNames.editProfile,
-            pageBuilder: (_, s) => _slidePage(state: s, child: const EditProfileScreen())),
+            pageBuilder: (_, s) => _slidePage(state: s, child: const EditProfileScreen()),),
         GoRoute(path: 'change-password', name: RouteNames.changePassword,
-            pageBuilder: (_, s) => _slidePage(state: s, child: const ChangePasswordScreen())),
+            pageBuilder: (_, s) => _slidePage(state: s, child: const ChangePasswordScreen()),),
         GoRoute(path: 'privacy', name: RouteNames.privacyPolicy,
-            pageBuilder: (_, s) => _slidePage(state: s, child: const PrivacyPolicyScreen())),
+            pageBuilder: (_, s) => _slidePage(state: s, child: const PrivacyPolicyScreen()),),
         GoRoute(path: 'terms', name: RouteNames.termsOfService,
-            pageBuilder: (_, s) => _slidePage(state: s, child: const TermsOfServicesScreen())),
+            pageBuilder: (_, s) => _slidePage(state: s, child: const TermsOfServicesScreen()),),
       ],
     ),
     GoRoute(path: RoutePaths.settings, name: RouteNames.settings,
-        pageBuilder: (_, s) => _slidePage(state: s, child: const SettingsScreen())),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const SettingsScreen()),),
 
     // ── Admin ─────────────────────────────────────────────
     GoRoute(
       path: RoutePaths.partnerList, name: RouteNames.partnerList,
-      pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-          requiredRoles: const {Role.admin, Role.superAdmin}, child: const PartnerListScreen())),
+      pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+          requiredRoles: {Role.admin, Role.superAdmin}, child: PartnerListScreen(),),),
       routes: [
         GoRoute(path: 'new', name: RouteNames.partnerNew,
-            pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-                requiredRoles: const {Role.admin, Role.superAdmin}, child: const PartnerFormScreen()))),
+            pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+                requiredRoles: {Role.admin, Role.superAdmin}, child: PartnerFormScreen(),),),),
         GoRoute(path: ':id/edit', name: RouteNames.partnerEdit,
             pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
                 requiredRoles: const {Role.admin, Role.superAdmin},
-                child: PartnerFormScreen(partnerId: _parseId(s, 'id'))))),
+                child: PartnerFormScreen(partnerId: _parseId(s, 'id')),),),),
       ],
     ),
     GoRoute(path: RoutePaths.notifications, name: RouteNames.notifications,
-        pageBuilder: (_, s) => _slidePage(state: s, child: _RoleGuard(
-            requiredRoles: const {Role.admin, Role.superAdmin}, child: const NotificationsScreen()))),
+        pageBuilder: (_, s) => _slidePage(state: s, child: const _RoleGuard(
+            requiredRoles: {Role.admin, Role.superAdmin}, child: NotificationsScreen(),),),),
 
     // ── Errors ────────────────────────────────────────────
     GoRoute(path: RoutePaths.forbidden, name: RouteNames.forbidden,
-        pageBuilder: (_, s) => _fadePage(state: s, child: const ForbiddenScreen())),
+        pageBuilder: (_, s) => _fadePage(state: s, child: const ForbiddenScreen()),),
   ];
 
   static CustomTransitionPage<void> _fadePage({required GoRouterState state, required Widget child}) =>
       CustomTransitionPage<void>(
         key: state.pageKey, child: child,
-        transitionDuration: const Duration(milliseconds: 300),
-        transitionsBuilder: (_, anim, __, c) => FadeTransition(opacity: anim, child: c));
+        transitionsBuilder: (_, anim, __, c) => FadeTransition(opacity: anim, child: c),);
 
   static CustomTransitionPage<void> _slidePage({required GoRouterState state, required Widget child}) =>
       CustomTransitionPage<void>(
         key: state.pageKey, child: child,
-        transitionDuration: const Duration(milliseconds: 300),
         transitionsBuilder: (_, anim, __, c) => SlideTransition(
           position: Tween(begin: const Offset(1.0, 0.0), end: Offset.zero)
               .animate(CurvedAnimation(parent: anim, curve: Curves.easeOut)),
-          child: c));
+          child: c,),);
 
   static int _parseId(GoRouterState state, String param) {
     final raw = state.pathParameters[param];

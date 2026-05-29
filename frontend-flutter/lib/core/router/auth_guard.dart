@@ -23,8 +23,7 @@ class AuthGuardWidget extends ConsumerWidget {
   final Widget? loadingWidget;
  
   const AuthGuardWidget({
-    super.key,
-    required this.child,
+    required this.child, super.key,
     this.loadingWidget,
   });
  
@@ -77,9 +76,7 @@ class RoleGuardWidget extends ConsumerWidget {
   final Widget?   fallback;
  
   const RoleGuardWidget({
-    super.key,
-    required this.requiredRoles,
-    required this.child,
+    required this.requiredRoles, required this.child, super.key,
     this.fallback,
   });
  

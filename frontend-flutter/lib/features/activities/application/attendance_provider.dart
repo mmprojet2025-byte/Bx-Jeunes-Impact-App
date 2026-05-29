@@ -30,7 +30,7 @@ Future<void> _load() async {
         await _repo.markAttendance(registrationId, status);
     state = state.whenData((list) => list
         .map((r) => r.id == registrationId ? updated : r)
-        .toList());
+        .toList(),);
   }
 
   Future<void> refresh() => _load();
@@ -39,5 +39,5 @@ Future<void> _load() async {
 final attendanceProvider = StateNotifierProvider.family<AttendanceNotifier,
     AsyncValue<List<Registration>>, int>(
   (ref, activityId) => AttendanceNotifier(
-      ref.read(registrationRepositoryProvider), activityId),
+      ref.read(registrationRepositoryProvider), activityId,),
 );

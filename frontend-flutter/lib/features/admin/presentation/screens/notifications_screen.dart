@@ -6,12 +6,12 @@ class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
  
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => const Scaffold(
     backgroundColor: AppColors.background,
     appBar: CustomAppBar(title: 'Notifications'),
-    body: const Center(
+    body: Center(
       child: Text('À implémenter',
-          style: TextStyle(color: AppColors.textSecondary)),
+          style: TextStyle(color: AppColors.textSecondary),),
     ),
   );
 }
