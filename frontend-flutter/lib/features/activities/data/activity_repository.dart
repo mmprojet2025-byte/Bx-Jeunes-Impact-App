@@ -13,22 +13,22 @@ class ActivityRepository {
     _api.get<PaginatedResponse<Activity>>(AppConfig.activitiesEndpoint,
       queryParams: {if (category != null) 'category': category, 'page': page, 'size': 20},
       fromJson: (j) => PaginatedResponse.fromJson(j as Map<String, dynamic>,
-          (e) => Activity.fromJson(e as Map<String, dynamic>)));
+          (e) => Activity.fromJson(e as Map<String, dynamic>),),);
  
   Future<Activity> fetchById(int id) =>
-    _api.get<Activity>('\${AppConfig.activitiesEndpoint}/\$id',
-      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>));
+    _api.get<Activity>(r'${AppConfig.activitiesEndpoint}/$id',
+      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>),);
  
   Future<Activity> create(Map<String, dynamic> body) =>
     _api.post<Activity>(AppConfig.activitiesEndpoint, body: body,
-      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>));
+      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>),);
  
   Future<Activity> update(int id, Map<String, dynamic> body) =>
-    _api.put<Activity>('\${AppConfig.activitiesEndpoint}/\$id', body: body,
-      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>));
+    _api.put<Activity>(r'${AppConfig.activitiesEndpoint}/$id', body: body,
+      fromJson: (j) => Activity.fromJson(j as Map<String, dynamic>),);
  
-  Future<void> delete(int id) => _api.delete('\${AppConfig.activitiesEndpoint}/\$id');
+  Future<void> delete(int id) => _api.delete(r'${AppConfig.activitiesEndpoint}/$id');
 }
  
 final activityRepositoryProvider = Provider<ActivityRepository>((ref) =>
-    ActivityRepository(ref.read(apiServiceProvider)));
+    ActivityRepository(ref.read(apiServiceProvider)),);

@@ -21,8 +21,8 @@ class ForgotPasswordState {
   const ForgotPasswordState({
     this.isLoading      = false,
     this.sent           = false,
-    this.error          = null,
-    this.submittedEmail = null,
+    this.error,
+    this.submittedEmail,
   });
  
   ForgotPasswordState copyWith({
@@ -96,4 +96,4 @@ class ForgotPasswordNotifier extends StateNotifier<ForgotPasswordState> {
  
 final forgotPasswordProvider =
     StateNotifierProvider<ForgotPasswordNotifier, ForgotPasswordState>((ref) =>
-        ForgotPasswordNotifier(ref.read(authRepositoryProvider)));
+        ForgotPasswordNotifier(ref.read(authRepositoryProvider)),);

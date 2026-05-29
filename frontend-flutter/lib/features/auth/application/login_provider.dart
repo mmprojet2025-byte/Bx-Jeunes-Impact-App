@@ -92,4 +92,4 @@ class LoginNotifier extends StateNotifier<LoginState> {
  
 final loginProvider =
     StateNotifierProvider<LoginNotifier, LoginState>((ref) =>
-        LoginNotifier(ref.read(authRepositoryProvider), ref));
+        LoginNotifier(ref.read(authRepositoryProvider), ref),);

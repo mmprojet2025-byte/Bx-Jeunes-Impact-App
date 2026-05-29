@@ -8,12 +8,12 @@ class ActivityListState {
   final int page;
   final String? error, categoryFilter;
   const ActivityListState({this.items = const [], this.isLoading = false,
-    this.hasMore = true, this.page = 0, this.error, this.categoryFilter});
+    this.hasMore = true, this.page = 0, this.error, this.categoryFilter,});
   ActivityListState copyWith({List<Activity>? items, bool? isLoading, bool? hasMore,
-    int? page, String? error, String? categoryFilter, bool clearError = false}) =>
+    int? page, String? error, String? categoryFilter, bool clearError = false,}) =>
     ActivityListState(items: items ?? this.items, isLoading: isLoading ?? this.isLoading,
       hasMore: hasMore ?? this.hasMore, page: page ?? this.page,
-      error: clearError ? null : error ?? this.error, categoryFilter: categoryFilter ?? this.categoryFilter);
+      error: clearError ? null : error ?? this.error, categoryFilter: categoryFilter ?? this.categoryFilter,);
 }
  
 class ActivityListNotifier extends StateNotifier<ActivityListState> {
@@ -36,4 +36,4 @@ class ActivityListNotifier extends StateNotifier<ActivityListState> {
 }
  
 final activityListProvider = StateNotifierProvider<ActivityListNotifier, ActivityListState>((ref) =>
-    ActivityListNotifier(ref.read(activityRepositoryProvider)));
+    ActivityListNotifier(ref.read(activityRepositoryProvider)),);

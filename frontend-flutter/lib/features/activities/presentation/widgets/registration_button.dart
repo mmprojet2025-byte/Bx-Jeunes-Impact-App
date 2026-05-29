@@ -36,25 +36,25 @@ class RegistrationButton extends StatelessWidget {
           foregroundColor: AppColors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12)),
+              borderRadius: BorderRadius.circular(12),),
         ),
         child: isLoading
             ? const SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(
-                    color: Colors.white, strokeWidth: 2.5))
+                    color: Colors.white, strokeWidth: 2.5,),)
             : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Icon(_isRegistered ? Icons.cancel_outlined : Icons.add_circle_outline,
-                    size: 20),
+                    size: 20,),
                 const SizedBox(width: 8),
                 Text(
                     _isRegistered
                         ? 'Annuler mon inscription'
                         : 'S\'inscrire à cette activité',
                     style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.bold)),
-              ]),
+                        fontSize: 15, fontWeight: FontWeight.bold,),),
+              ],),
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/constants/app_config.dart';
 import '../../../shared/providers/api_service_provider.dart';
 import '../../../shared/services/api_service.dart';
-import 'participation_request.dart';
+import 'participation_request_model.dart';
  
 class ParticipationRequestRepository {
   final ApiService _api;

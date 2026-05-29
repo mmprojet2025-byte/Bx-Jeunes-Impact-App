@@ -7,7 +7,7 @@ class NotificationTargetSelector extends StatelessWidget {
   final void Function(NotificationTarget) onChanged;
 
   const NotificationTargetSelector(
-      {required this.selected, required this.onChanged, super.key});
+      {required this.selected, required this.onChanged, super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ class NotificationTargetSelector extends StatelessWidget {
                 onChanged: (v) => v != null ? onChanged(v) : null,
                 title: Text(_label(t),
                     style: const TextStyle(
-                        fontSize: 14, color: AppColors.textPrimary)),
+                        fontSize: 14, color: AppColors.textPrimary,),),
                 activeColor: AppColors.primary,
                 contentPadding: EdgeInsets.zero,
                 dense: true,
-              ))
+              ),)
           .toList(),
     );
   }

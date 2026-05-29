@@ -8,7 +8,7 @@ class ActivityFilters extends StatelessWidget {
   final void Function(ActivityCategory?) onChanged;
 
   const ActivityFilters(
-      {required this.onChanged, super.key, this.selected});
+      {required this.onChanged, super.key, this.selected,});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,9 @@ class ActivityFilters extends StatelessWidget {
                   onTap: () => onChanged(selected == c ? null : c),
                   child: CategoryChip(
                       category: c,
-                      compact: selected != c),
+                      compact: selected != c,),
                 ),
-              )),
+              ),),
         ],
       ),
     );
@@ -43,7 +43,7 @@ class _FilterChip extends StatelessWidget {
   final bool selected;
   final VoidCallback onTap;
   const _FilterChip(
-      {required this.label, required this.selected, required this.onTap});
+      {required this.label, required this.selected, required this.onTap,});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -61,7 +61,7 @@ class _FilterChip extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: selected
                       ? AppColors.white
-                      : AppColors.textSecondary)),
+                      : AppColors.textSecondary,),),
         ),
       );
 }

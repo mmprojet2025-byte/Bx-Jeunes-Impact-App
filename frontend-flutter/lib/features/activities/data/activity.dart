@@ -58,9 +58,7 @@ class Activity {
   const Activity({
     required this.id,
     required this.name,
-    this.description,
-    required this.date,
-    required this.category,
+    required this.date, required this.category, this.description,
     this.groupName,
     this.maxParticipants,
     this.currentParticipants,

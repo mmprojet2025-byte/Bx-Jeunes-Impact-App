@@ -1,9 +1,7 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
- 
+
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/models/user.dart';
@@ -13,51 +11,47 @@ import '../../../../shared/widgets/error_states/error_widget.dart';
 import '../../../activities/data/activity.dart';
 import '../../../projects/data/project.dart';
 import '../../application/home_provider.dart';
-import '../../data/news.dart';
 import '../widgets/my_projects_section.dart';
 import '../widgets/news_pinned_carousel.dart';
 import '../widgets/quick_actions_grid.dart';
 import '../widgets/upcoming_activities_section.dart';
 import '../widgets/welcome_banner.dart';
- 
+
 const double _tabletBreakpoint = 768.0;
- 
-class HomeScreen extends ConsumerStatefulWidget {
+
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
- 
+
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
- 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  int _navIndex = 0;
- 
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final homeAsync   = ref.watch(homeProvider);
     final currentUser = ref.watch(currentUserProvider);
     final isTablet    = MediaQuery.of(context).size.width >= _tabletBreakpoint;
- 
+
+    // FIX: compute nav index from current route so the bar stays in sync
+    final location = GoRouterState.of(context).matchedLocation;
+    final navIndex = location.startsWith('/activities') ? 1
+        : location.startsWith('/projects') ? 2
+        : location.startsWith('/profile')  ? 3
+        : 0;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: homeAsync.when(
-          error: (error, _) => AppErrorWidget(
-            message: error.toString(),
-            onRetry: () => ref.refresh(homeProvider),
-          ),
+          error: (err, _) => AppErrorWidget(
+              message: err.toString(), onRetry: () => ref.refresh(homeProvider)),
           loading: () => _buildContent(
-            data: null, user: currentUser, isTablet: isTablet, isLoading: true,),
+              data: null, user: currentUser, isTablet: isTablet, isLoading: true, ref: ref, context: context),
           data: (data) => _buildContent(
-            data: data, user: currentUser, isTablet: isTablet, isLoading: false,),
+              data: data, user: currentUser, isTablet: isTablet, isLoading: false, ref: ref, context: context),
         ),
       ),
       bottomNavigationBar: AppBottomNavBar(
-        selectedIndex: _navIndex,
+        selectedIndex: navIndex,
         onTap: (i) {
-          setState(() => _navIndex = i);
           switch (i) {
-            // FIX : context.goNamed au lieu de Navigator.pushNamed avec chemins string
+            case 0: context.goNamed(RouteNames.home);
             case 1: context.goNamed(RouteNames.activities);
             case 2: context.goNamed(RouteNames.projects);
             case 3: context.goNamed(RouteNames.profile);
@@ -66,12 +60,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
     );
   }
- 
+
   Widget _buildContent({
     required HomeData? data,
     required AppUser? user,
     required bool isTablet,
     required bool isLoading,
+    required WidgetRef ref,
+    required BuildContext context,
   }) {
     return RefreshIndicator(
       color: AppColors.red,
@@ -79,125 +75,115 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: CustomScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
- 
           SliverToBoxAdapter(
             child: user != null
                 ? WelcomeBanner(
                     user: user,
-                    // FIX : goNamed au lieu de pushNamed
                     onProfileTap: () => context.goNamed(RouteNames.profile),
                     onNotificationTap: () {},
                   )
                 : const SizedBox(height: 70),
           ),
- 
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(top: 16),
               child: NewsPinnedCarousel(
-                news: isLoading ? null : data!.pinnedNews,
-                onNewsTap: (_) {}, // TODO: NewsDetailScreen
+                news: isLoading ? null : data?.pinnedNews,
+                // FIX: navigate to news detail instead of no-op
+                onNewsTap: (news) => context.goNamed(
+                  RouteNames.newsDetail,
+                  pathParameters: {'id': news.id.toString()},
+                ),
               ),
             ),
           ),
- 
           SliverToBoxAdapter(
             child: isTablet
-                ? _buildTabletLayout(data, isLoading)
-                : _buildMobileLayout(data, isLoading),
+                ? _buildTabletLayout(data, isLoading, context, ref)
+                : _buildMobileLayout(data, isLoading, context, ref),
           ),
- 
           SliverToBoxAdapter(
             child: QuickActionsGrid(
-              // FIX : goNamed au lieu de pushNamed
               onActivitiesTap: () => context.goNamed(RouteNames.activities),
               onProjectsTap:   () => context.goNamed(RouteNames.projects),
               onGroupsTap:     () => context.goNamed(RouteNames.groups),
             ),
           ),
- 
           const SliverToBoxAdapter(child: SizedBox(height: 24)),
         ],
       ),
     );
   }
- 
-  Widget _buildMobileLayout(HomeData? data, bool isLoading) {
+
+  Widget _buildMobileLayout(HomeData? data, bool isLoading, BuildContext context, WidgetRef ref) {
+    // FIX: use ?. instead of ! to prevent null-check crash
+    final regActivities = isLoading ? null
+        : data?.nextThreeRegistrations.map((r) => r.activity).toList();
+
     return Column(children: [
       UpcomingActivitiesSection(
         title: 'Mes activités à venir',
-        activities: isLoading
-            ? null
-            : data!.nextThreeRegistrations
-            .map((r) => r.activity)
-            .toList(),
-        emptyTitle:       'Aucune activité à venir',
-        emptySubtitle:    'Parcourez le catalogue et inscrivez-vous !',
+        activities: regActivities,
+        emptyTitle: 'Aucune activité à venir',
+        emptySubtitle: 'Parcourez le catalogue et inscrivez-vous !',
         emptyActionLabel: 'Voir les activités',
         onEmptyAction: () => context.goNamed(RouteNames.activities),
         onSeeAll:      () => context.goNamed(RouteNames.activities),
-        onActivityTap: _openActivityDetail,
+        onActivityTap: (a) => _openActivity(context, a),
       ),
       MyProjectsSection(
-        projects:    isLoading ? null : data!.myProjects,
+        projects:    isLoading ? null : data?.myProjects,
         onSeeAll:    () => context.goNamed(RouteNames.projects),
-        onProjectTap: _openProjectDetail,
+        onProjectTap: (p) => _openProject(context, p),
       ),
       UpcomingActivitiesSection(
         title: 'Activités proposées par l\'ASBL',
-        activities: isLoading ? null : data!.asblActivities,
-        emptyTitle:  'Aucune activité planifiée',
-        emptySubtitle: 'Revenez bientôt pour découvrir les prochains événements.',
-        onSeeAll:    () => context.goNamed(RouteNames.activities),
-        onActivityTap: _openActivityDetail,
+        activities: isLoading ? null : data?.asblActivities,
+        emptyTitle: 'Aucune activité planifiée',
+        emptySubtitle: 'Revenez bientôt.',
+        onSeeAll:      () => context.goNamed(RouteNames.activities),
+        onActivityTap: (a) => _openActivity(context, a),
       ),
-    ],);
+    ]);
   }
- 
-  Widget _buildTabletLayout(HomeData? data, bool isLoading) {
+
+  Widget _buildTabletLayout(HomeData? data, bool isLoading, BuildContext context, WidgetRef ref) {
+    final regActivities = isLoading ? null
+        : data?.nextThreeRegistrations.map((r) => r.activity).toList();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(child: Column(children: [
           UpcomingActivitiesSection(
-            title: 'Mes activités à venir',
-            activities: isLoading
-                ? null
-                : data!.nextThreeRegistrations.map((r) => r.activity).toList(),
-            emptyTitle:       'Aucune activité à venir',
-            emptySubtitle:    'Parcourez le catalogue !',
+            title: 'Mes activités à venir', activities: regActivities,
+            emptyTitle: 'Aucune activité à venir', emptySubtitle: 'Parcourez le catalogue !',
             emptyActionLabel: 'Voir les activités',
             onEmptyAction: () => context.goNamed(RouteNames.activities),
             onSeeAll:      () => context.goNamed(RouteNames.activities),
-            onActivityTap: _openActivityDetail,
+            onActivityTap: (a) => _openActivity(context, a),
           ),
           MyProjectsSection(
-            projects:    isLoading ? null : data!.myProjects,
-            onSeeAll:    () => context.goNamed(RouteNames.projects),
-            onProjectTap: _openProjectDetail,
+            projects: isLoading ? null : data?.myProjects,
+            onSeeAll: () => context.goNamed(RouteNames.projects),
+            onProjectTap: (p) => _openProject(context, p),
           ),
-        ],),),
+        ])),
         const SizedBox(width: 12),
         Expanded(child: UpcomingActivitiesSection(
           title: 'Activités de l\'ASBL',
-          activities: isLoading ? null : data!.asblActivities,
-          emptyTitle:  'Aucune activité planifiée',
-          emptySubtitle: 'Revenez bientôt.',
-          onSeeAll:    () => context.goNamed(RouteNames.activities),
-          onActivityTap: _openActivityDetail,
-        ),),
-      ],),
+          activities: isLoading ? null : data?.asblActivities,
+          emptyTitle: 'Aucune activité planifiée', emptySubtitle: 'Revenez bientôt.',
+          onSeeAll:      () => context.goNamed(RouteNames.activities),
+          onActivityTap: (a) => _openActivity(context, a),
+        )),
+      ]),
     );
   }
- 
-  // FIX : utilise goNamed avec pathParameters au lieu de pushNamed avec string
-  void _openActivityDetail(Activity a) => context.goNamed(
-        RouteNames.activityDetail,
-        pathParameters: {'id': a.id.toString()},
-      );
- 
-  void _openProjectDetail(Project p) => context.goNamed(
-        RouteNames.projectDetail,
-        pathParameters: {'id': p.id.toString()},
-      );
+
+  void _openActivity(BuildContext context, Activity a) =>
+      context.goNamed(RouteNames.activityDetail, pathParameters: {'id': a.id.toString()});
+
+  void _openProject(BuildContext context, Project p) =>
+      context.goNamed(RouteNames.projectDetail, pathParameters: {'id': p.id.toString()});
 }

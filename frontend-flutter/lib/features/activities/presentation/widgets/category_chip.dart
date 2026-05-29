@@ -6,14 +6,14 @@ class CategoryChip extends StatelessWidget {
   final bool compact;
 
   const CategoryChip(
-      {required this.category, super.key, this.compact = false});
+      {required this.category, super.key, this.compact = false,});
 
   @override
   Widget build(BuildContext context) {
     final color = category.color;
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: compact ? 8 : 12, vertical: compact ? 3 : 5),
+          horizontal: compact ? 8 : 12, vertical: compact ? 3 : 5,),
       decoration: BoxDecoration(
         color: color.withOpacity(0.12),
         borderRadius: BorderRadius.circular(20),
@@ -25,8 +25,8 @@ class CategoryChip extends StatelessWidget {
             style: TextStyle(
                 fontSize: compact ? 10 : 11,
                 fontWeight: FontWeight.w600,
-                color: color)),
-      ]),
+                color: color,),),
+      ],),
     );
   }
 }

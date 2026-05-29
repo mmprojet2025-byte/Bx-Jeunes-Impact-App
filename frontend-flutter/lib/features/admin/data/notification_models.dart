@@ -31,10 +31,10 @@ class AppNotification {
         body: j['body'] as String,
         target: NotificationTarget.values.firstWhere(
             (t) => t.name.toUpperCase() == (j['target'] as String).toUpperCase(),
-            orElse: () => NotificationTarget.all),
+            orElse: () => NotificationTarget.all,),
         status: NotificationStatus.values.firstWhere(
             (s) => s.name.toUpperCase() == (j['status'] as String).toUpperCase(),
-            orElse: () => NotificationStatus.sent),
+            orElse: () => NotificationStatus.sent,),
         groupId: j['groupId'] as int?,
         createdAt: DateTime.parse(j['createdAt'] as String),
         sentCount: j['sentCount'] as int?,

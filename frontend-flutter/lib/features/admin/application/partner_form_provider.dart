@@ -6,13 +6,13 @@ class PartnerFormState {
   final bool success;
   final String? error;
   const PartnerFormState(
-      {this.isLoading = false, this.success = false, this.error});
+      {this.isLoading = false, this.success = false, this.error,});
   PartnerFormState copyWith(
-          {bool? isLoading, bool? success, String? error, bool clear = false}) =>
+          {bool? isLoading, bool? success, String? error, bool clear = false,}) =>
       PartnerFormState(
           isLoading: isLoading ?? this.isLoading,
           success: success ?? this.success,
-          error: clear ? null : error ?? this.error);
+          error: clear ? null : error ?? this.error,);
 }
 
 class PartnerFormNotifier extends StateNotifier<PartnerFormState> {
@@ -32,7 +32,7 @@ class PartnerFormNotifier extends StateNotifier<PartnerFormState> {
       state = state.copyWith(isLoading: false, success: true);
     } catch (e) {
       state = state.copyWith(
-          isLoading: false, error: 'Erreur : $e');
+          isLoading: false, error: 'Erreur : $e',);
     }
   }
 }
@@ -40,5 +40,5 @@ class PartnerFormNotifier extends StateNotifier<PartnerFormState> {
 final partnerFormProvider = StateNotifierProvider.family<PartnerFormNotifier,
     PartnerFormState, int?>(
   (ref, id) => PartnerFormNotifier(ref.read(partnerRepositoryProvider),
-      partnerId: id),
+      partnerId: id,),
 );

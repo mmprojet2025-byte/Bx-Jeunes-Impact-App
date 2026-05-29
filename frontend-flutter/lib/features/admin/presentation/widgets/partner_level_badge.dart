@@ -21,8 +21,8 @@ class PartnerLevelBadge extends StatelessWidget {
             style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
-                color: level.color)),
-      ]),
+                color: level.color,),),
+      ],),
     );
   }
 }

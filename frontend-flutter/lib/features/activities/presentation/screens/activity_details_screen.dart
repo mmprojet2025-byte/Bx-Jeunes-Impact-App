@@ -4,15 +4,15 @@ import '../../../../../shared/widgets/app_bar/custom_app_bar.dart';
  
 class ActivityDetailScreen extends StatelessWidget {
   final int activityId;
-  const ActivityDetailScreen({super.key, required this.activityId});
+  const ActivityDetailScreen({required this.activityId, super.key});
  
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => const Scaffold(
     backgroundColor: AppColors.background,
     appBar: CustomAppBar(title: 'Activité'),
-    body: const Center(
+    body: Center(
       child: Text('À implémenter',
-          style: TextStyle(color: AppColors.textSecondary)),
+          style: TextStyle(color: AppColors.textSecondary),),
     ),
   );
 }

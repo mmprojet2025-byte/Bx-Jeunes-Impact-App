@@ -4,7 +4,7 @@ import '../data/notification_repository.dart';
 
 final notificationHistoryProvider =
     AsyncNotifierProvider<NotificationHistoryNotifier, List<AppNotification>>(
-        NotificationHistoryNotifier.new);
+        NotificationHistoryNotifier.new,);
 
 class NotificationHistoryNotifier
     extends AsyncNotifier<List<AppNotification>> {
@@ -15,7 +15,7 @@ class NotificationHistoryNotifier
   Future<void> refresh() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(
-        () => ref.read(notificationRepositoryProvider).fetchHistory());
+        () => ref.read(notificationRepositoryProvider).fetchHistory(),);
   }
 }
 
@@ -24,13 +24,13 @@ class NotificationSendState {
   final bool success;
   final String? error;
   const NotificationSendState(
-      {this.isLoading = false, this.success = false, this.error});
+      {this.isLoading = false, this.success = false, this.error,});
   NotificationSendState copyWith(
-          {bool? isLoading, bool? success, String? error, bool clear = false}) =>
+          {bool? isLoading, bool? success, String? error, bool clear = false,}) =>
       NotificationSendState(
           isLoading: isLoading ?? this.isLoading,
           success: success ?? this.success,
-          error: clear ? null : error ?? this.error);
+          error: clear ? null : error ?? this.error,);
 }
 
 class NotificationSendNotifier extends StateNotifier<NotificationSendState> {

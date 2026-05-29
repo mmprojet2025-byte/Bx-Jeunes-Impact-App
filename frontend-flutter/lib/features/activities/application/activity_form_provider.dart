@@ -7,10 +7,10 @@ class ActivityFormState {
   final bool success;
   final String? error;
   const ActivityFormState(
-      {this.isLoading = false, this.success = false, this.error});
+      {this.isLoading = false, this.success = false, this.error,});
 
   ActivityFormState copyWith(
-          {bool? isLoading, bool? success, String? error, bool clear = false}) =>
+          {bool? isLoading, bool? success, String? error, bool clear = false,}) =>
       ActivityFormState(
         isLoading: isLoading ?? this.isLoading,
         success: success ?? this.success,
@@ -56,7 +56,7 @@ class ActivityFormNotifier extends StateNotifier<ActivityFormState> {
       state = state.copyWith(isLoading: false, success: true);
     } catch (e) {
       state = state.copyWith(
-          isLoading: false, error: 'Erreur lors de la sauvegarde : $e');
+          isLoading: false, error: 'Erreur lors de la sauvegarde : $e',);
     }
   }
 

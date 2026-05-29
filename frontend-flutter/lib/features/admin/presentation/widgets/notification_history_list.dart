@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../data/notification_models.dart';
+import '../../../admin/data/notification_models.dart';
 
 class NotificationHistoryList extends StatelessWidget {
   final List<AppNotification> notifications;
@@ -11,7 +11,7 @@ class NotificationHistoryList extends StatelessWidget {
     if (notifications.isEmpty) {
       return const Center(
           child: Text('Aucune notification envoyée',
-              style: TextStyle(color: AppColors.textSecondary)));
+              style: TextStyle(color: AppColors.textSecondary),),);
     }
     return ListView.separated(
       itemCount: notifications.length,
@@ -36,20 +36,20 @@ class _NotificationTile extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: Icon(Icons.notifications_outlined,
-              color: n.statusColor, size: 20),
+              color: n.statusColor, size: 20,),
         ),
         title: Text(n.title,
             style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary)),
+                color: AppColors.textPrimary,),),
         subtitle: Text('${n.targetLabel} • ${n.statusLabel}',
             style:
-                const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                const TextStyle(fontSize: 12, color: AppColors.textSecondary),),
         trailing: n.sentCount != null
             ? Text('${n.sentCount}',
                 style: const TextStyle(
-                    fontSize: 12, color: AppColors.textSecondary))
+                    fontSize: 12, color: AppColors.textSecondary,),)
             : null,
       );
 }
