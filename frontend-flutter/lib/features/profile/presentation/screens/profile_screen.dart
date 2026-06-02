@@ -1,3 +1,5 @@
+import 'package:bx_jeunes_impact/shared/widgets/skeleton_loader.dart';
+import 'package:bx_jeunes_impact/features/projects/application/project_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +12,6 @@ import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/app_bar/custom_app_bar.dart';
 import '../../../../shared/widgets/badges/role_badge.dart';
 import '../../../../shared/widgets/error_states/error_widget.dart';
-import '../../../../shared/widgets/loaders/skeleton_loader.dart';
 import '../../../projects/data/project.dart';
 import '../../application/profile_provider.dart';
 

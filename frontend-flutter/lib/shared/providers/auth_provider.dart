@@ -288,13 +288,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 final authProvider =
     StateNotifierProvider<AuthNotifier, AuthState>((ref) =>
         AuthNotifier(ref.read(apiServiceProvider)));
- 
-/// Provider dérivé — utilisateur courant (null si non connecté).
-/// Évite de rebuilder les widgets qui n'ont besoin que de l'user.
-///
-/// Usage : final user = ref.watch(currentUserProvider);
-final currentUserProvider = Provider<AppUser?>((ref) =>
-    ref.watch(authProvider).user);
+
  
 /// Provider dérivé — true si connecté.
 /// Usage : final isAuth = ref.watch(isAuthenticatedProvider);

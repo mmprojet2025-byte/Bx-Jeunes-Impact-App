@@ -1,3 +1,4 @@
+import 'package:bx_jeunes_impact/features/projects/data/project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,18 +6,14 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/models/role.dart';
-import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/current_user_provider.dart';
 import '../../../../shared/widgets/app_bar/custom_app_bar.dart';
 import '../../../../shared/widgets/buttons/primary_button.dart';
 import '../../../../shared/widgets/buttons/secondary_button.dart';
 import '../../../../shared/widgets/error_states/error_widget.dart';
-import '../../../../shared/widgets/loaders/skeleton_loader.dart';
 import '../../application/participation_requests_provider.dart';
 import '../../application/project_detail_provider.dart';
 import '../../application/project_validation_provider.dart';
-import '../../data/project.dart';
 
 class ProjectDetailScreen extends ConsumerWidget {
   final int projectId;
@@ -393,7 +390,7 @@ class _DetailSkeleton extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          SkeletonLoader(
+          Skeletonizer(enabled: true,
             child: Container(
               height: 44,
               decoration: BoxDecoration(
@@ -403,7 +400,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          SkeletonLoader(
+          Skeletonizer(enabled: true,
             child: Container(
               height: 24,
               width: 200,
@@ -411,7 +408,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          SkeletonLoader(
+          Skeletonizer(enabled: true,
             child: Container(
               height: 120,
               decoration: BoxDecoration(
@@ -421,7 +418,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          SkeletonLoader(
+          Skeletonizer(enabled: true,
             child: Container(
               height: 200,
               decoration: BoxDecoration(

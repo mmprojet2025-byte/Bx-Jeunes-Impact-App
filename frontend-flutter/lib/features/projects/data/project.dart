@@ -1,13 +1,3 @@
-// Modèles pour la feature Projets.
-//
-// Entités backend mirrorées :
-//   Project.java       → Project
-//   ProjectStatus.java → ProjectStatus (enum 8 valeurs)
-//
-// Extra :
-//   ProjectCreateRequest → ProjectCreateRequest (miroir de ProjectCreateRequest.java)
-//   ProjectParticipationRequest → nouveau (UML révisé)
- 
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';

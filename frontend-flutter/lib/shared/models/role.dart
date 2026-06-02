@@ -1,10 +1,3 @@
-// Miroir exact de l'enum Role.java du backend.
-// Valeurs JSON : "YOUTH" | "GROUP_REFERENT" | "ADMIN" |
-//               "PARTNER" | "SUPER_ADMIN" | "PROJECT_MANAGER"
-//
-// json_serializable utilise EnumConverters pour la (dé)sérialisation.
-// Les valeurs sont passées telles quelles en JSON (SCREAMING_SNAKE_CASE).
- 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
  
@@ -61,6 +54,10 @@ enum Role {
       this == Role.groupReferent ||
       this == Role.projectManager;
 
-  static Object? fromString(String r) {}
+  static Role fromString(String r) => Role.values.firstWhere(
+    (e) => e.jsonValue == r.toUpperCase(),
+    orElse: () => Role.youth,
+  );
 }
+
  

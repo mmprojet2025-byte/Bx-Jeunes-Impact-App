@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/app_config.dart';
-import '../../../features/dashboard/data/dashboard_repository.dart';
+import '../../../features/dashboard/data/statistics_models.dart';
 import '../../../shared/providers/api_service_provider.dart';
 
 final statsProvider = AsyncNotifierProvider<StatsNotifier, AppStats>(StatsNotifier.new);

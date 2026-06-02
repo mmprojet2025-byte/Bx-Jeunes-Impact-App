@@ -93,9 +93,8 @@ class ParticipationRequestsNotifier
 } // ← accolade fermante du Notifier
 
 // ── Provider ──────────────────────────────────────────────────
-final participationRequestsProvider = AsyncNotifierProvider.family
-    ParticipationRequestsNotifier,
-    List<ParticipationRequest>,
-    int>(
+final participationRequestsProvider =
+    AsyncNotifierProvider.family<ParticipationRequestsNotifier,
+        List<ParticipationRequest>, int>(
   ParticipationRequestsNotifier.new,
 );
