@@ -3,7 +3,6 @@ import 'package:bx_jeunes_impact/features/projects/data/project.dart';
 
 class StatusBadge extends StatelessWidget {
   final ProjectStatus status;
-
   const StatusBadge({required this.status, super.key});
 
   @override
@@ -16,11 +15,7 @@ class StatusBadge extends StatelessWidget {
       ),
       child: Text(
         status.label,
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-          color: status.color,
-        ),
+        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: status.color),
       ),
     );
   }

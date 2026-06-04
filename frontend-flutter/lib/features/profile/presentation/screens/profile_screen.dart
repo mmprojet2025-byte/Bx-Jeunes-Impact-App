@@ -1,3 +1,4 @@
+import 'package:bx_jeunes_impact/shared/providers/current_user_provider.dart';
 import 'package:bx_jeunes_impact/shared/widgets/skeleton_loader.dart';
 import 'package:bx_jeunes_impact/features/projects/application/project_list_provider.dart';
 import 'package:flutter/material.dart';

@@ -390,7 +390,7 @@ class _DetailSkeleton extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          Skeletonizer(enabled: true,
+          SkeletonLoader(
             child: Container(
               height: 44,
               decoration: BoxDecoration(
@@ -400,7 +400,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Skeletonizer(enabled: true,
+          SkeletonLoader(
             child: Container(
               height: 24,
               width: 200,
@@ -408,7 +408,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Skeletonizer(enabled: true,
+          SkeletonLoader(
             child: Container(
               height: 120,
               decoration: BoxDecoration(
@@ -418,7 +418,7 @@ class _DetailSkeleton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Skeletonizer(enabled: true,
+          SkeletonLoader(
             child: Container(
               height: 200,
               decoration: BoxDecoration(
