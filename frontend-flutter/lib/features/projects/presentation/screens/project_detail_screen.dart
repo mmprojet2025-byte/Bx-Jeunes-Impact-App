@@ -1,3 +1,4 @@
+import 'package:bx_jeunes_impact/shared/widgets/skeleton_loader.dart';
 import 'package:bx_jeunes_impact/features/projects/data/project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
