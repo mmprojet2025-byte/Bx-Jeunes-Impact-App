@@ -1,3 +1,4 @@
+import 'package:bx_jeunes_impact/features/projects/data/project.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,18 +6,16 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/models/role.dart';
 import '../../../../shared/widgets/badges/role_badge.dart';
 import '../../../../shared/widgets/badges/status_badge.dart';
 import '../../../../shared/widgets/error_states/error_widget.dart';
-import '../../../../shared/widgets/loaders/skeleton_loader.dart';
+import '../../../../shared/widgets/skeleton_loader.dart';
 import '../../../dashboard/application/stats_provider.dart';
 import '../../../dashboard/data/statistics_models.dart';
 import '../../../members/application/member_list_provider.dart';
 import '../../../members/data/member_models.dart';
 import '../../../projects/application/project_list_provider.dart';
 import '../../../projects/application/project_validation_provider.dart';
-import '../../../projects/data/project.dart';
 
 class AdminDashboardScreen extends ConsumerStatefulWidget {
   const AdminDashboardScreen({super.key});
