@@ -5,11 +5,12 @@
 Le backend Spring Boot nécessite une base de données PostgreSQL (version 16 ou supérieure) nommée `bxji_dev`. Vous pouvez l'initialiser de deux manières :
 
 #### Option A : Via Docker (Recommandé)
-Si vous avez Docker installé, c'est la méthode la plus rapide. À la racine du projet, exécutez simplement :
+Si vous avez Docker installé, c'est la méthode la plus rapide. Exécutez la commande suivante (en remplaçant le mot de passe par une valeur de votre choix) :
 ```bash
-docker-compose up -d
+docker run --name bxji-db -e POSTGRES_USER=bxji_user -e POSTGRES_PASSWORD=VOTRE_MOT_DE_PASSE -e POSTGRES_DB=bxji_dev -p 5432:5432 -d postgres:16
+```
 
-Cette commande lancera une instance PostgreSQL, créera l'utilisateur bxji_user avec le mot de passe bxji_password, et initialisera la base bxji_dev automatiquement.
+Cette commande lancera une instance PostgreSQL, créera l'utilisateur bxji_user avec le mot de passe que vous avez choisi, et initialisera la base bxji_dev automatiquement.
 (Note : si vous utilisez cette méthode, n'oubliez pas de mettre à jour le application.properties pour utiliser ces identifiants).
 
 Option B : Manuellement (via pgAdmin)
