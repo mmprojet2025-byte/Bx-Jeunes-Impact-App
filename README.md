@@ -36,12 +36,15 @@ docs/              documentation (décisions d'architecture, API, maquettes)
 **Prérequis :** JDK 21, Flutter, PostgreSQL 16 ou plus.
 
 1. **Base de données.** Créer une base PostgreSQL nommée `bxji_dev` (voir [database/README.md](database/README.md)).
-2. **Backend.** Renseigner l'URL, l'utilisateur et le mot de passe de la base dans `backend-spring/src/main/resources/application.properties`, puis :
+2. **Backend.** Les identifiants de la base et la clé JWT sont lus dans des variables d'environnement, jamais dans le code. Copier `backend-spring/.env.example` en `backend-spring/.env`, le remplir (la clé JWT se génère avec `openssl rand -base64 32`), puis :
 
    ```bash
    cd backend-spring
+   set -a; source .env; set +a   # macOS / Linux
    ./mvnw spring-boot:run
    ```
+
+   Sous Windows ou dans un IDE, définir les mêmes variables (`DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET_KEY`) dans la configuration de lancement.
 
    L'API écoute sur `http://localhost:8081`. Flyway crée les tables au démarrage et la migration `V8` ajoute des comptes de test **réservés au développement**.
 3. **Frontend.**
@@ -57,7 +60,8 @@ docs/              documentation (décisions d'architecture, API, maquettes)
 ## Sécurité
 
 - Authentification par jetons JWT et refresh tokens.
-- **Avant tout déploiement :** la clé JWT et les identifiants de la base ne doivent plus être écrits dans `application.properties`. Il faut générer une nouvelle clé secrète et fournir ces valeurs par variables d'environnement.
+- La clé JWT et les identifiants de la base sont fournis par variables d'environnement (`backend-spring/.env.example`) ; le fichier `.env` est ignoré par Git.
+- Les anciennes valeurs, présentes dans l'historique Git, ne doivent plus être utilisées : générer une nouvelle clé JWT et un nouveau mot de passe de base pour chaque environnement.
 - Les comptes de test de la migration `V8` doivent être retirés en production.
 
 ## Documentation

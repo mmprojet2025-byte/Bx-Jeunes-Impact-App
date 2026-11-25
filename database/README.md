@@ -11,7 +11,7 @@ docker run --name bxji-db -e POSTGRES_USER=bxji_user -e POSTGRES_PASSWORD=VOTRE_
 ```
 
 Cette commande lancera une instance PostgreSQL, créera l'utilisateur bxji_user avec le mot de passe que vous avez choisi, et initialisera la base bxji_dev automatiquement.
-(Note : si vous utilisez cette méthode, n'oubliez pas de mettre à jour le application.properties pour utiliser ces identifiants).
+(Note : si vous utilisez cette méthode, reportez ces identifiants dans `DB_USERNAME` et `DB_PASSWORD` du fichier `backend-spring/.env`, voir `backend-spring/.env.example`).
 
 Option B : Manuellement (via pgAdmin)
 Si vous préférez utiliser votre propre installation locale de PostgreSQL :
@@ -20,4 +20,4 @@ Connectez-vous à votre serveur PostgreSQL (ex: utilisateur postgres).
 
 Créez une nouvelle base de données nommée bxji_dev.
 
-Assurez-vous que vos identifiants locaux (username et password) correspondent à ceux configurés dans le fichier backend-spring/src/main/resources/application.properties.
+Assurez-vous que vos identifiants locaux (username et password) correspondent à `DB_USERNAME` et `DB_PASSWORD` dans le fichier `backend-spring/.env` (voir `backend-spring/.env.example`).
